@@ -6,3 +6,18 @@ Contributors
   - Noblesse Kasa
   - Paul Pauwels
   - Cyril VUILLEMIN
+  
+### Initialisation du projet
+
+Tout d'abord il configurer la base de données local.
+Creer le fichier **application.properties** en copiant le fichier **application-local.properties**
+
+Installer les dépendances
+```sh
+$ mvn install
+```
+
+Run le projet
+```sh
+$ mvn spring-boot:run
+```
