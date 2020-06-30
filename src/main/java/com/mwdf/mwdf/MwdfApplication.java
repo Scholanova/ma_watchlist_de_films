@@ -1,5 +1,4 @@
-package com.mwdf.mwdf;
-
+package com.mwdf.mwdf;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,7 +7,6 @@ public class MwdfApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MwdfApplication.class, args);
-		System.out.println("Hello World!");
 	}
 
 }
