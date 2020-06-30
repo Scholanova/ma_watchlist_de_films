@@ -8,7 +8,6 @@ public class MwdfApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MwdfApplication.class, args);
-		System.out.println("Hello World!");
 	}
 
 }
