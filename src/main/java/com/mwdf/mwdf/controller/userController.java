@@ -37,4 +37,13 @@ public class userController
 	{
 		return "redirection to saveUser ok";
 	}
+	
+	//@PostMapping("/connectUser")
+	@RequestMapping("/connectUser")
+	@ResponseBody
+	public String connectUser(/*@Valid User user,BindingResult result,Model model*/)
+	{
+		return "redirection to connectUser ok";
+	}
+	
 }
