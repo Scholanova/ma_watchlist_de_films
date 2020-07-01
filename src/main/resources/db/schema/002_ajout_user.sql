@@ -1,0 +1,1 @@
+INSERT INTO USERS (name, email) VALUES ('toto', 'email@email')
