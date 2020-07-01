@@ -1,6 +1,7 @@
 package com.mwdf.mwdf.controller;
 
 import com.mwdf.mwdf.repository.UserRepository;
+import com.mwdf.mwdf.service.UserService;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,10 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @EnableAutoConfiguration
 public class MainController {
 
-	private UserRepository userRepository;
+	private UserService userService;
 
-	public MainController(UserRepository userRepository){
-		this.userRepository = userRepository;
+	public MainController(UserService userService){
+		this.userService = userService;
 	}
 //
 //	@RequestMapping("/")
@@ -25,7 +26,7 @@ public class MainController {
 	@RequestMapping("/user")
 	@ResponseBody
 	public String getUser(){
-		String user = userRepository.getUser();
-		return "" +user;
+		String user = userService.getUser();
+		return "Utilisateur avec l'id 1 : " +user;
 	}
 }
