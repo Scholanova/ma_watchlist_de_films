@@ -13,6 +13,8 @@ public class Movie {
 	private String overview;
 	private double popularity;
 	
+	//JSON
+	
 	public Movie() {
 		
 	}
