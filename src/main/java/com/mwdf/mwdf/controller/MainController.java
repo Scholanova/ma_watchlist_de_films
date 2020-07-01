@@ -27,6 +27,6 @@ public class MainController {
 	@ResponseBody
 	public String getUser(){
 		String user = userService.getUser();
-		return "Utilisateur avec l'id 1 : " +user;
+		return "Utilisateur avec l'id 1 : " + user;
 	}
 }
