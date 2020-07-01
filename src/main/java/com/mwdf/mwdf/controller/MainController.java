@@ -16,12 +16,12 @@ public class MainController {
 	public MainController(UserService userService){
 		this.userService = userService;
 	}
-//
-//	@RequestMapping("/")
-//	@ResponseBody
-//	public String sayHello() {
-//		return "Hello World!";
-//	}
+
+	@RequestMapping("/")
+	@ResponseBody
+	public String sayHello() {
+		return "Hello World!";
+	}
 
 	@RequestMapping("/user")
 	@ResponseBody
