@@ -4,7 +4,7 @@ executors:
     docker:
       - image: circleci/openjdk:8-jdk
         environment:
-          DATABASE_URL: jdbc:postgressql://postgres:postgres@localhost/project_watcher
+          DATABASE_URL: jdbc:postgresql://postgres:postgres@127.0.0.1:5432/project_watcher
       - image: postgres:11.7-alpine
         environment:
           POSTGRES_USER: postgres
