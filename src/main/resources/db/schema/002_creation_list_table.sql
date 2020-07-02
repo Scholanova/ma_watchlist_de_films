@@ -1,11 +1,8 @@
 --liquibase formatted sql
 
---changeset scholanova:1
+--changeset scholanova:2
 CREATE TABLE IF NOT EXISTS LISTS (
   LIST_ID                 SERIAL PRIMARY KEY,
   TITLE				      VARCHAR(100) NOT NULL,
-  MOVIE_ID				  NUMERIC,
-  USER_ID				  NUMERIC NOT NULL,
-  FOREIGN KEY (MOVIE_ID) REFERENCES MOVIES (MOVIE_ID),
-  FOREIGN KEY (USER_ID) REFERENCES USERS (USER_ID)
+  USER_ID				  NUMERIC NOT NULL
 );
