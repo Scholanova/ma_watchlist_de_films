@@ -32,8 +32,7 @@ public class MovieController {
 	@Value("${apidb.token}")
 	private String TOKEN;
 	
-	@Value("${apidb.language}")
-	private String LANG;
+	private String LANG = "fr-FR";
 
 	@RequestMapping("/api")
 	@ResponseBody
