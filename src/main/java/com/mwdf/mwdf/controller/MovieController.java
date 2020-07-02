@@ -8,10 +8,6 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c35242d1b88010f934c5c9d40723a81d2b9b9219
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.PropertySource;
@@ -63,11 +59,6 @@ public class MovieController {
 	@RequestMapping("/movie/{id}")
 	@ResponseBody
 	public String getMovie(@PathVariable("id") int movieId) {
-<<<<<<< HEAD
-		String url = "https://api.themoviedb.org/3/movie/"+ movieId+"?api_key="+TOKEN+"&language="+LANG;
-=======
-		String movie = "https://api.themoviedb.org/3/movie/"+ movieId+"?api_key="+TOKEN+"&language="+LANG;
->>>>>>> c35242d1b88010f934c5c9d40723a81d2b9b9219
 				
 		/*
 		Gson g = new Gson();
@@ -77,7 +68,6 @@ public class MovieController {
 		String serializedMovie = new Gson().toJson(outputMovie.toString());
 		return serializedMovie;
 		*/
-<<<<<<< HEAD
 		String jsonMovie = getUrlContent(url);
 		//Jackson does't ignore what is not in class
 		//Movie m = new Gson().fromJson(json, Movie.class);
@@ -96,10 +86,10 @@ public class MovieController {
 			e.printStackTrace();
 		}
 		return m2.toString();
-=======
+
 
 		return getUrlContent(movie);
->>>>>>> c35242d1b88010f934c5c9d40723a81d2b9b9219
+
 
 	}
 	
