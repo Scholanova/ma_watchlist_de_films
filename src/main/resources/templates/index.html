@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>Page d'accueil</title>
 		<!--<base href="/" />-->
@@ -29,8 +29,8 @@
 		</div>
 		
 		<div class="search-container">
-		    <form action="#">
-		      <input type="text" placeholder="Chercher un film.." name="search">
+		    <form th:action="@{/search}" th:object="${params}" method="get">
+		      <input type="text" placeholder="Chercher un film.." name="params">
 		      <button type="submit"><i class="fa fa-search"></i></button>
 		    </form>
   		</div>
