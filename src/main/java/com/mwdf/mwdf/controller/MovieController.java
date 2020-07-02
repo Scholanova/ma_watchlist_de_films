@@ -13,9 +13,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.PropertySource;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -46,12 +44,12 @@ public class MovieController {
 	public String getMovieList() {
 		return "";
 	}
-	
 
 
-	@RequestMapping("/search/{params}")
+
+	@RequestMapping(value="/search",method = RequestMethod.GET)
 	@ResponseBody
-	public String searchMovie(@PathVariable("params") String params) {
+	public String searchMovie( @RequestParam String params) {
 		String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
 		return getUrlContent(url);
 	}
