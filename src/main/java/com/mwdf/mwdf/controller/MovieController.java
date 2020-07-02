@@ -105,7 +105,7 @@ public class MovieController {
 		StringBuilder sb = new StringBuilder();
 		try {
 
-			
+
 	        URL url = new URL(lien);
 	        BufferedReader in = new BufferedReader(
 	        new InputStreamReader(url.openStream()));
@@ -124,7 +124,7 @@ public class MovieController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return sb.toString();
 	}
 }
