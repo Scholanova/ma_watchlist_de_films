@@ -59,7 +59,7 @@ public class MovieController {
 	@RequestMapping("/movie/{id}")
 	@ResponseBody
 	public String getMovie(@PathVariable("id") int movieId) {
-				
+		String url = "https://api.themoviedb.org/3/movie/"+ movieId+"?api_key="+TOKEN+"&language="+LANG;		
 		/*
 		Gson g = new Gson();
 		
