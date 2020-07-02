@@ -32,7 +32,7 @@ public class RegisterController {
             return new ModelAndView("redirect:/");
         }
 
-        return new ModelAndView("/connexion/inscription");
+        return new ModelAndView("connexion/inscription");
     }
 
     @GetMapping("/inscription-error")
