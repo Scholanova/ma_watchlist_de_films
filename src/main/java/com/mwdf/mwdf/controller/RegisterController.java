@@ -10,9 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collections;
@@ -25,7 +23,7 @@ public class RegisterController {
     private UserRepository userRepository;
 
 
-    @RequestMapping(value = "/inscription", method = RequestMethod.GET)
+    @GetMapping("/inscription")
     public ModelAndView getRegistred() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -37,7 +35,7 @@ public class RegisterController {
         return new ModelAndView("/connexion/inscription");
     }
 
-    @RequestMapping(value = "/inscription-error", method = RequestMethod.GET)
+    @GetMapping("/inscription-error")
     public String getRegistredWithError(Model model) {
         model.addAttribute("registrationError", true);
 
@@ -45,7 +43,7 @@ public class RegisterController {
     }
 
 
-    @RequestMapping(value = "/inscription", method = RequestMethod.POST)
+    @PostMapping("/inscription")
     public ModelAndView postRegistred(@RequestParam("userName") String userName,
                                              @RequestParam("password") String password,
                                              @RequestParam("firstName") String firstName,
