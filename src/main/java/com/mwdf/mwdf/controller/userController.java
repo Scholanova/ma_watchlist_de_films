@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 @Controller
 public class userController
 {
@@ -44,4 +45,5 @@ public class userController
 	{
 		return "redirection to connectUser ok";
 	}
+
 }
