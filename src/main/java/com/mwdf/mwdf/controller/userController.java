@@ -45,4 +45,5 @@ public class userController
 	{
 		return "redirection to connectUser ok";
 	}
+	
 }
