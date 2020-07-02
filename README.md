@@ -1,6 +1,9 @@
 # ma_watchlist_de_films!
 
-Contributors
+
+Application Watcher permet de créer une Playist de film à regarder [à compléter ]
+
+## Contributors
 
   - Eva Sobaco-Morison
   - Noblesse Kasa
@@ -24,3 +27,5 @@ Run le projet
 ```sh
 $ mvn spring-boot:run
 ```
+
+
