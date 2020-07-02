@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Movie {
 	
-
-
 	private boolean adult;
 	private long budget;
 	private int id;
