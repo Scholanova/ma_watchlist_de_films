@@ -50,26 +50,21 @@ text-align:center
 	margin:auto;
 }
 .search-container button {
-  float: right;
-  padding: 6px 10px;
-  margin-top: 8px;
-  margin-right: 16px;
-  background: #ddd;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
+  margin-right: -4%;
+	background: #ddd;
+	font-size: 17px;
+	border: none;
+	cursor: pointer;
+	float: right;
+	display: block;
+	text-align: left;
+	margin-top: 0%;
+	padding: 6px;
 }
 .search-container button:hover {
   background: #ccc;
 }
-.search-container button {
-   float: none;
-   display: block;
-   text-align: left;
-   width: 100%;
-   margin: 0;
-   padding: 14px;
- }
+
  .search-container input[type=text] {
    border: 1px solid #ccc;
 width: 100%;
