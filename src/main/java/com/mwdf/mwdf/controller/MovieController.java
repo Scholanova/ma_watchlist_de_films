@@ -123,6 +123,7 @@ public class MovieController {
 	public String getUrlContent(String lien) {
 		StringBuilder sb = new StringBuilder();
 		try {
+
 	        URL url = new URL(lien);
 	        BufferedReader in = new BufferedReader(
 	        new InputStreamReader(url.openStream()));
@@ -139,7 +140,7 @@ public class MovieController {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 		return sb.toString();
 	}
 }

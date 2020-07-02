@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Page d'accueil</title>
+		<!--<base href="/" />-->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+		<link href="../static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link href="../static/js/bootstrap.js" rel="stylesheet" th:href="@{/js/bootstrap.js}"/>
+		<link href="../static/js/bootstrap.min.js" rel="stylesheet" th:href="@{/js/bootstrap.min.js}"/>
+		<link href="../static/css/accueil.css" rel="stylesheet" th:href="@{/css/accueil.css}"/>
+	</head>
+	<body>
+		<div class="topnav" id="myTopnav">
+		  <a class="active" href="/"><i class="fa fa-fw fa-home"></i></a>
+		  <a href="/inscription">Inscription</a>
+		  <a href="/connexion">Connexion</a>
+		  <a href="#about">à propos</a>
+		  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+		    <i class="fa fa-bars"></i>
+		  </a>
+		</div>
+		<div class="welcome">
+			<h1>Bienvenu sur watcher!!!</h1>
+			<p>Cherchez un film et ajoutez-le dans votre watchlist</p>
+		</div>
+		
+		<div class="search-container">
+		    <form action="#">
+		      <input type="text" placeholder="Chercher un film.." name="search">
+		      <button type="submit"><i class="fa fa-search"></i></button>
+		    </form>
+  		</div>
+	</body>
+</html>
