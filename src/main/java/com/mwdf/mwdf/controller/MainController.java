@@ -19,6 +19,6 @@ public class MainController {
 	@GetMapping("/")
 	public String accueilPage()
 	{
-		return "index"; //le nom du template
+		return "index";
 	}
 }
