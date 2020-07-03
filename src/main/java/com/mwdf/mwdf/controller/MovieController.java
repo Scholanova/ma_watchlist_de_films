@@ -21,6 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.mwdf.mwdf.entity.APIMovieDBAuthToken;
 import com.mwdf.mwdf.entity.Movie;
+import com.mwdf.mwdf.entity.Result;
+import com.mwdf.mwdf.services.MovieService;
 
 @Controller
 @EnableAutoConfiguration
@@ -28,11 +30,20 @@ import com.mwdf.mwdf.entity.Movie;
 
 public class MovieController {
 
+
+
 	@Value("${apidb.token}")
 	private String TOKEN;
 	
 	private String LANG = "fr-FR";
+	private MovieService movieService;
+	
+	public MovieController(MovieService movieService) {
+		super();
+		this.movieService = movieService;
+	}
 
+	
 	@RequestMapping("/api")
 	@ResponseBody
 	public String sayHelloAPI() {
@@ -50,8 +61,22 @@ public class MovieController {
 	@RequestMapping(value="/search",method = RequestMethod.GET)
 	@ResponseBody
 	public String searchMovie( @RequestParam String params) {
+		/*
 		String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
-		return getUrlContent(url);
+		return movieService.getUrlContent(url);
+		*/
+		
+		String json = movieService.searchMovies(params);
+		Result res = new Result();
+		
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			res = mapper.readValue(json, Result.class);
+
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return res.toString();
 	}
 
 	@RequestMapping("/movie/{id}")
@@ -117,7 +142,6 @@ public class MovieController {
 		return jsonMovie;
 		//return apidbtoken.toString();
 	}
-	
 	public String getUrlContent(String lien) {
 		StringBuilder sb = new StringBuilder();
 		try {
