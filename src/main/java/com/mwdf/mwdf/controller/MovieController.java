@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.PropertySource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -23,6 +24,8 @@ import com.mwdf.mwdf.entity.APIMovieDBAuthToken;
 import com.mwdf.mwdf.entity.Movie;
 import com.mwdf.mwdf.entity.Result;
 import com.mwdf.mwdf.services.MovieService;
+import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 @EnableAutoConfiguration
@@ -60,7 +63,7 @@ public class MovieController {
 
 	@RequestMapping(value="/search",method = RequestMethod.GET)
 	@ResponseBody
-	public String searchMovies( @RequestParam String params) {
+	public ModelAndView searchMovies(@RequestParam String params, Model model) {
 		/*
 		String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
 		return movieService.getUrlContent(url);
@@ -76,7 +79,9 @@ public class MovieController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		return res.toString();
+		model.addAttribute("movies", res.getResults());
+		return new ModelAndView("index");
+
 	}
 
 	@RequestMapping("/movie/{id}")

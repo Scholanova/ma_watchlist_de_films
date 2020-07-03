@@ -38,10 +38,9 @@
 					<button onclick="myFunction()" class="dropbtn">Dropdown</button>
 					<div id="myDropdown" class="dropdown-content">
 						<input type="text" placeholder="Chercher un film.." name="params">
-						<tr th:each="film: ${results}">
-							<td th:text="${results.original_title}" />
-							<td th:text="${results.overview}" />
-							<td th:text="${results.release_date}" />
+						<tr th:each="movie: ${movies}">
+							<td th:text="${movie.original_title}" />
+							<td th:text="${movie.overview}" />
 						</tr>
 					</div>
 				</div>
