@@ -60,11 +60,7 @@ public class MovieController {
 
 	@RequestMapping(value="/search",method = RequestMethod.GET)
 	@ResponseBody
-<<<<<<< mwdf-Issue-2A
 	public String searchMovies( @RequestParam String params) {
-=======
-	public String searchMovie( @RequestParam String params) {
->>>>>>> update entity movie and added result entity
 		/*
 		String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
 		return movieService.getUrlContent(url);
@@ -146,14 +142,11 @@ public class MovieController {
 		return jsonMovie;
 		//return apidbtoken.toString();
 	}
-<<<<<<< mwdf-Issue-2A
 	@RequestMapping("/movie/random")
 	@ResponseBody
 	public String randomMovie() {
 		return movieService.getRandomMovie();
 	}
-=======
->>>>>>> update entity movie and added result entity
 	public String getUrlContent(String lien) {
 		StringBuilder sb = new StringBuilder();
 		try {

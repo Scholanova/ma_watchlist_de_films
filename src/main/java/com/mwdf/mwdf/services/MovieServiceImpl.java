@@ -20,37 +20,7 @@ public class MovieServiceImpl implements MovieService{
 
     @Value("${apidb.token}")
     private String TOKEN;
-<<<<<<< mwdf-Issue-2A
     private final String LANG = "fr-FR";
-=======
-
-
-    /*
-    public Movie searchMovie(@PathVariable("params") String params) throws MovieException {
-        String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
-        String s = getUrlContent(url);
-        Movie m = new Movie();
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            m = mapper.readValue(s, Movie.class);
-        } catch (JsonProcessingException e)
-        {
-            e.printStackTrace();
-        }
-        return m;
-
-    }
-    */
-    public String searchMovies(String params) {
-    	String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
-        return getUrlContent(url);
-    }
-    
-    public String search(@PathVariable("params") String params) {
-        String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
-        return getUrlContent(url);
-    }
->>>>>>> update entity movie and added result entity
 
     public String getUrlContent(String lien) {
         StringBuilder sb = new StringBuilder();
@@ -78,7 +48,6 @@ public class MovieServiceImpl implements MovieService{
 
         return sb.toString();
     }
-<<<<<<< mwdf-Issue-2A
     public String getMovie(int movieId) {
     	String url = "https://api.themoviedb.org/3/movie/"+ movieId+"?api_key="+TOKEN+"&language="+LANG;	
     	return getUrlContent(url);
@@ -129,6 +98,4 @@ public class MovieServiceImpl implements MovieService{
 		}
 		return m;
 	}
-=======
->>>>>>> update entity movie and added result entity
 }
