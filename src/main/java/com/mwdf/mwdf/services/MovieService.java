@@ -7,7 +7,11 @@ public interface MovieService {
 
 
     //public Movie searchMovie(String params) throws MovieException;
+	public String getMovie(int movieId);
     public String searchMovies(String params);
     public String getUrlContent(String lien);
+    public String getLatestMovie();
+    public String getRandomMovie();
+    
 
 }
