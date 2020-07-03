@@ -60,7 +60,7 @@ public class MovieController {
 
 	@RequestMapping(value="/search",method = RequestMethod.GET)
 	@ResponseBody
-	public String searchMovie( @RequestParam String params) {
+	public String searchMovies( @RequestParam String params) {
 		/*
 		String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
 		return movieService.getUrlContent(url);
@@ -141,6 +141,11 @@ public class MovieController {
 		}
 		return jsonMovie;
 		//return apidbtoken.toString();
+	}
+	@RequestMapping("/movie/random")
+	@ResponseBody
+	public String randomMovie() {
+		return movieService.getRandomMovie();
 	}
 	public String getUrlContent(String lien) {
 		StringBuilder sb = new StringBuilder();
