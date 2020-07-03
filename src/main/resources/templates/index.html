@@ -16,8 +16,10 @@
 	<body>
 		<div class="topnav" id="myTopnav">
 		  <a class="active" href="/"><i class="fa fa-fw fa-home"></i></a>
-		  <a href="/inscription">Inscription</a>
-		  <a href="/connexion">Connexion</a>
+		  <a href="#compte"><i class="fa fa-fw fa-user"></i>Mon compte</a>
+		  <a sec:authorize="isAnonymous()" href="/inscription">Inscription</a>
+		  <a sec:authorize="isAnonymous()" href="/connexion">Connexion</a>
+		  <a sec:authorize="isAnonymous()" th:href="@{/logout}">Déconnexion</a>
 		  <a href="#about">à propos</a>
 		  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
 		    <i class="fa fa-bars"></i>

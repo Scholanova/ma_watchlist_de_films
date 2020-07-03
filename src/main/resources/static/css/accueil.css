@@ -1,13 +1,13 @@
 body
 {
-	background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/bd777948-0e8f-4f7f-b0bf-f7e0ee0875e5/72f414c1-80ee-48a0-8651-5601c3e622ce/FR-fr-20200627-popsignuptwoweeks-perspective_alpha_website_small.jpg");
-	color: white;
+	/*background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/bd777948-0e8f-4f7f-b0bf-f7e0ee0875e5/72f414c1-80ee-48a0-8651-5601c3e622ce/FR-fr-20200627-popsignuptwoweeks-perspective_alpha_website_small.jpg");*/
+	color: Black;
 }
 /* Add a black background color to the top navigation */
 .topnav {
   background-color: #333;
   overflow: hidden;
-  margin-bottom: 8%;
+  margin-bottom: 3%;
 }
 
 /* Style the links inside the navigation bar */
