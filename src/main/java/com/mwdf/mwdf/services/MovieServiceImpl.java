@@ -3,8 +3,10 @@ package com.mwdf.mwdf.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mwdf.mwdf.entity.Movie;
+import com.mwdf.mwdf.entity.Result;
 import com.mwdf.mwdf.exception.MovieException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.BufferedReader;
@@ -13,13 +15,14 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+@Component
 public class MovieServiceImpl implements MovieService{
 
     @Value("${apidb.token}")
     private String TOKEN;
 
 
-
+    /*
     public Movie searchMovie(@PathVariable("params") String params) throws MovieException {
         String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
         String s = getUrlContent(url);
@@ -33,6 +36,16 @@ public class MovieServiceImpl implements MovieService{
         }
         return m;
 
+    }
+    */
+    public String searchMovies(String params) {
+    	String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
+        return getUrlContent(url);
+    }
+    
+    public String search(@PathVariable("params") String params) {
+        String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
+        return getUrlContent(url);
     }
 
     public String getUrlContent(String lien) {
@@ -61,7 +74,4 @@ public class MovieServiceImpl implements MovieService{
 
         return sb.toString();
     }
-
-
-
 }

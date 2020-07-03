@@ -6,6 +6,8 @@ import com.mwdf.mwdf.exception.MovieException;
 public interface MovieService {
 
 
-    public Movie searchMovie(String params) throws MovieException;
+    //public Movie searchMovie(String params) throws MovieException;
+    public String searchMovies(String params);
+    public String getUrlContent(String lien);
 
 }
