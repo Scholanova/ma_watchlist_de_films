@@ -19,8 +19,8 @@
 <body>
 	<div class="topnav" id="myTopnav">
 		  <a class="active" th:href="@{/}"><i class="fa fa-fw fa-home"></i></a>
-		  <a sec:authorize="isAnonymous()" th:href="@{/inscription}">Inscription</a>
-		  <a sec:authorize="isAnonymous()" th:href="@{/connexion}">Connexion</a>
+		  <a sec:authorize="isAnonymous()" th:href="inscription">Inscription</a>
+		  <a sec:authorize="isAnonymous()" th:href="connexion">Connexion</a>
 		  <a sec:authorize="isAnonymous()" th:href="@{/logout}">Déconnexion</a>
 		  <!--<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
 		          <input type="submit" value="Logout" />
