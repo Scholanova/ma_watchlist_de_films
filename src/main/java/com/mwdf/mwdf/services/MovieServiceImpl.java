@@ -20,33 +20,7 @@ public class MovieServiceImpl implements MovieService{
 
     @Value("${apidb.token}")
     private String TOKEN;
-
-
-    /*
-    public Movie searchMovie(@PathVariable("params") String params) throws MovieException {
-        String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
-        String s = getUrlContent(url);
-        Movie m = new Movie();
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            m = mapper.readValue(s, Movie.class);
-        } catch (JsonProcessingException e)
-        {
-            e.printStackTrace();
-        }
-        return m;
-
-    }
-    */
-    public String searchMovies(String params) {
-    	String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
-        return getUrlContent(url);
-    }
-    
-    public String search(@PathVariable("params") String params) {
-        String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
-        return getUrlContent(url);
-    }
+    private final String LANG = "fr-FR";
 
     public String getUrlContent(String lien) {
         StringBuilder sb = new StringBuilder();
@@ -74,4 +48,54 @@ public class MovieServiceImpl implements MovieService{
 
         return sb.toString();
     }
+    public String getMovie(int movieId) {
+    	String url = "https://api.themoviedb.org/3/movie/"+ movieId+"?api_key="+TOKEN+"&language="+LANG;	
+    	return getUrlContent(url);
+    }
+    /*
+    public Movie searchMovie(@PathVariable("params") String params) throws MovieException {
+        String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
+        String s = getUrlContent(url);
+        Movie m = new Movie();
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            m = mapper.readValue(s, Movie.class);
+        } catch (JsonProcessingException e)
+        {
+            e.printStackTrace();
+        }
+        return m;
+
+    }
+    */
+    public String searchMovies(String params) {
+    	String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
+        return getUrlContent(url);
+    }
+    public String search(@PathVariable("params") String params) {
+        String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
+        return getUrlContent(url);
+    }
+	public String getLatestMovie() {
+		String url = "https://api.themoviedb.org/3/movie/latest?api_key="+TOKEN+"&language="+LANG;
+		return getUrlContent(url);
+	}
+	public String getRandomMovie() {
+		String jsonLatestMovie = getLatestMovie();
+		Movie latest = parseJsonToMovie(jsonLatestMovie);
+		int idLatestMovie = latest.getId();
+		int randomMovieId = (int) (Math.random() * ( idLatestMovie - 100 ));
+		return getMovie(randomMovieId);
+	}
+	private Movie parseJsonToMovie(String json) {		
+		Movie m = new Movie();
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			m = mapper.readValue(json, Movie.class);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return m;
+	}
 }
