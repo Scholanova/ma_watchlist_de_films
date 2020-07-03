@@ -3,6 +3,5 @@
 --changeset scholanova:2
 CREATE TABLE IF NOT EXISTS LISTS (
   LIST_ID                 SERIAL PRIMARY KEY,
-  TITLE				      VARCHAR(100) NOT NULL,
-  USER_ID				  NUMERIC NOT NULL
+  TITLE				      VARCHAR(100) NOT NULL
 );
