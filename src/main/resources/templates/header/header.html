@@ -8,6 +8,7 @@
         <a th:href="@{/}">Page d'accueil</a>
         <a sec:authorize="isAnonymous()" th:href="@{/connexion}">Se connecter</a>
         <a sec:authorize="isAnonymous()" th:href="@{/inscription}">S'inscrire</a>
+        <a sec:authorize="isAnonymous()" th:href="@{/logout}">Déconnexion</a>
         <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
             <input type="submit" value="Logout" />
         </form>
