@@ -5,11 +5,13 @@ var inputLastnameChange = document.getElementById('lastname-change');
 
 btnModifier.addEventListener('click', updateBtn);
 
-function updateBtn() {
+function updateBtn(e) {
     if(btnModifier.type === "button"){
         inputUsernameChange.disabled = false;
         inputFirstnameChange.disabled = false;
         inputLastnameChange.disabled = false;
-//        btnModifier.type = "submit";
+        btnModifier.type = "submit";
+        e.preventDefault();
+        btnModifier.value = "Valider";
     }
 }

@@ -8,10 +8,6 @@
             <fieldset>
                 <th:block th:each="userInfo : ${userInfos}">
                     <div>
-                        <label for="username-change">Nom d'utilisateur</label>
-                        <input type="text" th:value="${userInfos.username}" id="username-change" name="username" placeholder="Nom d'utilisateur" disabled/>
-                    </div>
-                    <div>
                         <label for="firstname-change">Prenom</label>
                         <input type="text" th:value="${userInfos.firstname}" id="firstname-change" name="firstname" placeholder="Prenom" disabled/>
                     </div>
