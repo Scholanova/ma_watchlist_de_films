@@ -1,0 +1,14 @@
+--liquibase formatted sql
+
+--changeset scholanova:8
+DROP TABLE MOVIESLISTS CASCADE;
+DROP TABLE USERS CASCADE;
+DROP TABLE MOVIES CASCADE;
+DROP TABLE USERSLISTS CASCADE;
+DROP TABLE LISTS CASCADE;
+
+--changeset scholanova:9
+CREATE TABLE IF NOT EXISTS user_roles (
+  roleId                 SERIAL PRIMARY KEY
+);
+DROP TABLE user_roles CASCADE;
