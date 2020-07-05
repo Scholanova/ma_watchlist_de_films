@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 @Table(name = "lists")
 @Data
-public class List {
+public class CustomList {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "list_id")
@@ -19,18 +19,18 @@ public class List {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "movieslists",
         joinColumns = @JoinColumn(name = "list_id"),
-        inverseJoinColumns = @JoinColumn(name = "movie_id"))
+        inverseJoinColumns = @JoinColumn(name = "movie_id", nullable = true))
     Set<Movie> movies;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "userslists",
         joinColumns = @JoinColumn(name = "list_id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id"))
+        inverseJoinColumns = @JoinColumn(name = "user_id", nullable = false))
     Set<User> users;
 
     public Long getIdList() {
@@ -57,7 +57,24 @@ public class List {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void addUser(User user) {
+        this.getUsers().add(user);
+    }
+
+    public void addMovie(Movie movie) {
+        this.getMovies().add(movie);
+    }
+
+    public CustomList() {
+    }
+
+    public CustomList(String title) {
+        this.title = title;
+    }
+
+    public CustomList(String title, Set<Movie> movies, Set<User> users) {
+        this.title = title;
+        this.movies = movies;
         this.users = users;
     }
 }

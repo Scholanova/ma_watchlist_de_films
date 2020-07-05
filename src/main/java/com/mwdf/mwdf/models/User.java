@@ -67,14 +67,14 @@ public class User implements UserDetails {
     private boolean enabled;
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
-    Set<List> lists;
+    Set<CustomList> lists;
 
-    public Set<List> getLists() {
+    public Set<CustomList> getLists() {
         return lists;
     }
 
-    public void setLists(Set<List> lists) {
-        this.lists = lists;
+    public void addList(CustomList list) {
+        this.getLists().add(list);
     }
 
     public User() {

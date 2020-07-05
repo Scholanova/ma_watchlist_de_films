@@ -26,7 +26,7 @@ public class Movie {
     private int apiFilmId;
 
     @ManyToMany(mappedBy = "movies", fetch = FetchType.EAGER)
-    Set<List> lists;
+    Set<CustomList> lists;
 
     public Long getIdMovie() {
         return idMovie;
@@ -48,11 +48,18 @@ public class Movie {
         this.apiFilmId = apiFilmId;
     }
 
-    public Set<List> getLists() {
+    public Set<CustomList> getLists() {
         return lists;
     }
 
-    public void setLists(Set<List> lists) {
+    public void setLists(Set<CustomList> lists) {
         this.lists = lists;
+    }
+
+    public Movie() {}
+
+    public Movie(Date addedAt, int apiFilmId) {
+        this.addedAt = addedAt;
+        this.apiFilmId = apiFilmId;
     }
 }
