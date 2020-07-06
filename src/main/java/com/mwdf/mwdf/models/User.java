@@ -14,6 +14,7 @@ import org.springframework.util.StringUtils;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long idUser;
 
@@ -67,14 +68,15 @@ public class User implements UserDetails {
     private boolean enabled;
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
-    Set<CustomList> lists;
+    @Cascade(value = {CascadeType.PERSIST, CascadeType.MERGE})
+    Set<CustomList> lists = new HashSet<>();
+
+    public void setLists(Set<CustomList> lists) {
+        this.lists = lists;
+    }
 
     public Set<CustomList> getLists() {
         return lists;
-    }
-
-    public void addList(CustomList list) {
-        this.getLists().add(list);
     }
 
     public User() {
@@ -87,7 +89,7 @@ public class User implements UserDetails {
 
     public User(String username, String password, String firstname, String lastname, Collection<RoleEnum> roles) {
         this.username = username;
-        this.password = BCryptManagerUtil.passwordencoder().encode(password);
+        this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
         this.accountNonExpired = true;

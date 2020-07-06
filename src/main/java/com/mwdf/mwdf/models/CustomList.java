@@ -1,17 +1,17 @@
 package com.mwdf.mwdf.models;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "lists")
-@Data
 public class CustomList {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "list_id")
     private Long idList;
 
@@ -20,18 +20,20 @@ public class CustomList {
     private String title;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @Cascade(value = {org.hibernate.annotations.CascadeType.PERSIST, org.hibernate.annotations.CascadeType.MERGE})
     @JoinTable(
         name = "movieslists",
         joinColumns = @JoinColumn(name = "list_id"),
         inverseJoinColumns = @JoinColumn(name = "movie_id", nullable = true))
-    Set<Movie> movies;
+    Set<Movie> movies  =  new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @Cascade(value = {org.hibernate.annotations.CascadeType.PERSIST, org.hibernate.annotations.CascadeType.MERGE})
     @JoinTable(
         name = "userslists",
         joinColumns = @JoinColumn(name = "list_id"),
         inverseJoinColumns = @JoinColumn(name = "user_id", nullable = false))
-    Set<User> users;
+    Set<User> users =  new HashSet<>();
 
     public Long getIdList() {
         return idList;
@@ -57,12 +59,8 @@ public class CustomList {
         return users;
     }
 
-    public void addUser(User user) {
-        this.getUsers().add(user);
-    }
-
-    public void addMovie(Movie movie) {
-        this.getMovies().add(movie);
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     public CustomList() {

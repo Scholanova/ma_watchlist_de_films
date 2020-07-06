@@ -13,13 +13,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
-import java.util.*;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class CustomListRepositoryTest {
+public class UserRepositoryTest {
 
     @Autowired
     private CustomListRepository customListRepository;
@@ -52,13 +52,12 @@ public class CustomListRepositoryTest {
             // When
             // Then
             assertThat(user.getLists()).contains(list);
-            assertThat(customListRepository.findByUsers(user).get(0).getIdList()).isEqualTo(list.getIdList());
-            assertThat(customListRepository.findByUsers(user).get(0).getUsers().stream().findFirst().get().getUsername()).contains(user.getUsername());
-            assertThat(customListRepository.findByUsers(user).get(0).getTitle()).isEqualTo("maList");
+            assertThat(userRepository.findByUsername(user.getUsername()).getUsername()).isEqualTo("dzeq");
+            assertThat(userRepository.findByUsername(user.getUsername()).getUsername()).isEqualTo("dzeq");
         }
 
         @Test
-        void whenUserWithNoList_returnNoList() {
+        void whenTwoMessages_thenReturnsListWithTwoMessages() {
             // Given
             User user = new User("dzeq", "azaz", "cy", "ril", Collections.singleton(RoleEnum.USER));
 
@@ -66,7 +65,8 @@ public class CustomListRepositoryTest {
 
             // When
             // Then
-            assertThat(customListRepository.findByUsers(user)).isEmpty();
+            assertThat(userRepository.findByUsername(user.getUsername()).getIdUser()).isEqualTo(user.getIdUser());
+
         }
     }
 }
