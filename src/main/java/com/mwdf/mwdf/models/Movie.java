@@ -56,8 +56,7 @@ public class Movie {
 
     public Movie() {}
 
-    public Movie(Date addedAt, int apiFilmId) {
-        this.addedAt = addedAt;
+    public Movie(int apiFilmId) {
         this.apiFilmId = apiFilmId;
     }
 }
