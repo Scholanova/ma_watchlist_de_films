@@ -1,7 +1,9 @@
 package com.mwdf.mwdf.controller;
 
+
 import com.mwdf.mwdf.models.User;
 import com.mwdf.mwdf.repositories.UserRepository;
+
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Nested;
@@ -142,7 +144,7 @@ public class RegisterControllerTest {
 
 //             Then
             assertThat(responseEntity.getStatusCode()).isEqualTo(OK);
-            Assert.assertTrue(responseEntity.getBody().toString().contains("Le nom d'utilisateur existe déja"));
+            Assert.assertTrue(responseEntity.getBody().toString().contains("Le nom d'utilisateur existe déjà"));
         }
     }
 }
