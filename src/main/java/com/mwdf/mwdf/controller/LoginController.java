@@ -1,5 +1,7 @@
 package com.mwdf.mwdf.controller;
 
+import com.mwdf.mwdf.entity.Movie;
+import com.mwdf.mwdf.services.MovieService;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,11 +13,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 
+    private MovieService movieService;
+
     @GetMapping("/connexion")
-    public ModelAndView loginGet() {
+    public ModelAndView loginGet(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (!(auth instanceof AnonymousAuthenticationToken)) {
+            Movie movie = movieService.getRandomMovie();
+            model.addAttribute("movie", movie);
             return new ModelAndView("redirect:/");
         }
         return new ModelAndView("connexion/connexion");
