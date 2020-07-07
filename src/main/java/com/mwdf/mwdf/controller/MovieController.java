@@ -87,8 +87,6 @@ public class MovieController {
 
 			User user = userRepository.findByUsername(currentUserName);
 			model.addAttribute("lists", user.getLists());
-
-			return new ModelAndView("lists/myLists");
 		}
 
 		return new ModelAndView("index");
