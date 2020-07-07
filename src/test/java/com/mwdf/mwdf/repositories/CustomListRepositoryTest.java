@@ -1,6 +1,7 @@
 package com.mwdf.mwdf.repositories;
 
 import com.mwdf.mwdf.models.CustomList;
+import com.mwdf.mwdf.models.Movie;
 import com.mwdf.mwdf.models.User;
 import com.mwdf.mwdf.utils.RoleEnum;
 import org.junit.jupiter.api.AfterEach;
@@ -67,6 +68,29 @@ public class CustomListRepositoryTest {
             // When
             // Then
             assertThat(customListRepository.findByUsers(user)).isEmpty();
+        }
+
+        @Test
+        void whenAddMovieTOlist_thenListHaveThisFilm() {
+            // Given
+            User user = new User("dzeq", "azaz", "cy", "ril", Collections.singleton(RoleEnum.USER));
+            CustomList list = new CustomList("maList");
+            Movie movie = new Movie(6);
+            list.getUsers().add(user);
+            user.getLists().add(list);
+            userRepository.save(user);
+
+            User userSaved = userRepository.findByUsername(user.getUsername());
+
+            CustomList savedList = (CustomList) customListRepository.findByIdList(list.getIdList());
+
+            savedList.getMovies().add(movie);
+
+            customListRepository.save(savedList);
+
+            // When
+            // Then
+            assertThat(customListRepository.findByUsers(userSaved).get(0).getMovies().stream().findFirst().get().getApiFilmId()).isEqualTo(6);
         }
     }
 }

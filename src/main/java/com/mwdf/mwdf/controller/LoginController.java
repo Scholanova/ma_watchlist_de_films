@@ -25,6 +25,7 @@ public class LoginController {
     public ModelAndView loginGet(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
+        //si connecté
         if (!(auth instanceof AnonymousAuthenticationToken)) {
             Movie movie = movieService.getRandomMovie();
             model.addAttribute("movie", movie);
