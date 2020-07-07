@@ -66,6 +66,7 @@ public class MovieServiceImpl implements MovieService{
             e.printStackTrace();
         }
 
+        initMoviePosition(res);
         return res;
     }
     public String search(@PathVariable("params") String params) {
@@ -94,4 +95,12 @@ public class MovieServiceImpl implements MovieService{
 		}
 		return m;
 	}
+
+    private void initMoviePosition(Result res){
+        int i = 1;
+        for (Movie m : res.getResults()) {
+            m.setPosition(i);
+            i++;
+        }
+    }
 }
