@@ -4,7 +4,9 @@
 		<title>Page d'accueil</title>
 	</head>
 	<body>
-	<header th:replace="header/header::header"></header>
+	<script type="application/javascript" src="../js/jquery.min.js" th:scr="@{/js/jquery.min.js}"></script>
+	<link rel="stylesheet" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">
+	<header th:replace="header/header::header">	</header>
 		<div class="welcome">
 			<h1>Bienvenue sur watcher !!!</h1>
 			<p>Cherchez un film et ajoutez-le dans votre watchlist</p>
@@ -12,20 +14,6 @@
 		
 		<div class="search-container">
 		    <form th:action="@{/search}" th:object="${params}" method="get">
-
-		      <!-- <button type="submit"><i class="fa fa-search"></i></button>
-				<div class="dropdown">
-					<button onclick="myFunction()" class="dropbtn">Dropdown</button>
-					<div id="myDropdown" class="dropdown-content">
-						<input type="text" placeholder="Chercher un film.." name="params">
-						<tr th:each="movie: ${movies}">
-							<td th:text="${movie.original_title}" />
-							<td th:text="${movie.overview}" />
-						</tr>
-					</div>
-
-				</div> -->
-
 					<div class="wrapper">
 					<div class="search_box" style="margin-top: 60px;">
 						<div class="search_field">
@@ -45,7 +33,7 @@
 										<th th:text="${movie.original_title}" />
 										<th th:text="${movie.overview}" />
 										<th>
-											<button type="button" class="btn btn-primary"><i class="fas fa-plus"></i> </button>
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal"><i class="fas fa-plus"></i> </button>
 										</th>
 
 
@@ -58,5 +46,27 @@
 				</div>
 			</form>
   		</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					...
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	</body>
+
 </html>
