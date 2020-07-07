@@ -3,14 +3,11 @@
 
 	<head>
 		<title>Page d'accueil</title>
-
 	</head>
 	<body>
 	<header th:replace="header/header::header"></header>
 		<div class="welcome">
-
 			<h1>Bienvenue sur watcher !!!</h1>
-
 			<p>Cherchez un film et ajoutez-le dans votre watchlist</p>
 		</div>
 		
@@ -45,9 +42,13 @@
 								</thead>
 								<tbody>
 									<tr th:each="movie: ${movies}">
-										<th scope="row">1</th>
+										<th scope="row"  th:text="${movie.position}"></th>
 										<th th:text="${movie.original_title}" />
 										<th th:text="${movie.overview}" />
+										<th>
+											<button type="button" class="btn btn-primary"><i class="fas fa-plus"></i> </button>
+										</th>
+
 
 									</tr>
 								</tbody>
