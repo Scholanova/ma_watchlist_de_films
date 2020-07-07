@@ -44,34 +44,42 @@ text-align:center
 .welcome h1
 { font-size: 45px
 }
-.search-container
+
+.example
 {
-	width:50%;
-	margin:auto;
+	margin: auto;
+	max-width: 50%;
 }
-.search-container button {
-  margin-right: -4%;
-	background: #ddd;
-	font-size: 17px;
-	border: none;
-	cursor: pointer;
-	float: right;
-	display: block;
-	text-align: left;
-	margin-top: 0%;
-	padding: 6px;
-}
-.search-container button:hover {
-  background: #ccc;
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
 }
 
- .search-container input[type=text] {
-   border: 1px solid #ccc;
-width: 100%;
-color: black;
-padding: 1%;
- }
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
 
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
  /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}
@@ -108,11 +116,12 @@ body{
 	position: absolute;
 	width: 100%;
 	height: 100%;
-
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
+	margin-top: 2%;
+	margin-left: -25%;
 }
 .container-movie{
 	position: relative;
@@ -156,12 +165,12 @@ body{
 
 	background-color: #000;
 }
-/*.container-movie:hover .front{
+.container-movie:hover .front{
 	opacity: 1;
 	transition: opacity 0.5s ease-in-out;
 	-moz-transition: opacity 0.5s ease-in-out;
 	-webkit-transition: opacity 0.5s ease-in-out;
-}*/
+}
 .container-movie .movie .back{
 	transform-origin: 100%;
 	transform: rotateY(90deg) translateX(140px) translateZ(0px);
@@ -233,17 +242,6 @@ body{
 	background-color: #aaa;
 }
 
-/*div.movie-synopsis { 
-    margin:4px, 4px; 
-    padding:4px; 
-    background-color: green; 
-    width: 500px; 
-    height: 110px; 
-    overflow-x: hidden; 
-    overflow-y: auto; 
-    text-align:justify; 
-} */
-
 div .movie-synopsis{
 	margin:4px, 4px; 
 	width: 100%; 
@@ -254,8 +252,16 @@ div .movie-synopsis{
 	overflow-x: hidden; 
     overflow-y: auto; 
     text-align:justify; 
-}*/
+}
 
-.movie-synopsis p{
-	text-align:justify
-	}
+.btn-group{
+  margin-left: 22%;
+}
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
