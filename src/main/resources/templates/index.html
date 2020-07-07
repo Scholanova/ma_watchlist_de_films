@@ -2,18 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>Page d'accueil</title>
+
+
 	</head>
 	<body>
 	<header th:replace="header/header::header"></header>
 		<div class="welcome">
+
 			<h1>Bienvenue sur watcher !!!</h1>
+
 			<p>Cherchez un film et ajoutez-le dans votre watchlist</p>
 		</div>
 		
 		<div class="search-container">
 		    <form th:action="@{/search}" th:object="${params}" method="get">
 
-		      <button type="submit"><i class="fa fa-search"></i></button>
+		      <!-- <button type="submit"><i class="fa fa-search"></i></button>
 				<div class="dropdown">
 					<button onclick="myFunction()" class="dropbtn">Dropdown</button>
 					<div id="myDropdown" class="dropdown-content">
@@ -23,6 +27,34 @@
 							<td th:text="${movie.overview}" />
 						</tr>
 					</div>
+
+				</div> -->
+
+					<div class="wrapper">
+					<div class="search_box" style="margin-top: 60px;">
+						<div class="search_field">
+							<i class="fas fa-search" aria-hidden="true"></i>
+							<input type="text" class="input" name="params" placeholder="Chercher un film..">
+							<table class="table table-hover">
+								<thead class="thead-light">
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Nom</th>
+										<th scope="col">Résumer du film</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="movie: ${movies}">
+										<th scope="row">1</th>
+										<th th:text="${movie.original_title}" />
+										<th th:text="${movie.overview}" />
+
+									</tr>
+								</tbody>
+							</table>
+					  </div>
+					</div>
+
 				</div>
 			</form>
   		</div>

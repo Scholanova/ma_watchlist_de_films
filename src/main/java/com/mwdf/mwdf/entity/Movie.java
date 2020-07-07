@@ -16,13 +16,17 @@ public class Movie {
 	private double popularity;
 	private String poster_path;
 	private String backdrop_path;
+
+	private String posterFilm;
+
+	private int position;
 	
 	public Movie() {
 		
 	}
 	
 	public Movie(boolean adult, long budget, int id, String imdb_id, String original_language, String original_title,
-			String overview, double popularity, String poster_path, String backdrop_path) {
+				 String overview, double popularity, String poster_path, String backdrop_path) {
 		super();
 		this.adult = adult;
 		this.budget = budget;
@@ -34,6 +38,7 @@ public class Movie {
 		this.popularity = popularity;
 		this.poster_path = poster_path;
 		this.backdrop_path = backdrop_path;
+		this.initPosterFilm();
 	}
 	
 	public boolean isAdult() {
@@ -100,18 +105,33 @@ public class Movie {
 	public void setBackdrop_path(String backdrop_path) {
 		this.backdrop_path = backdrop_path;
 	}
+	public String getPosterFilm() {
+
+		return this.posterFilm;
+	}
+
+	public void setPosterFilm(String s){
+		this.posterFilm = s;
+	}
+
+	public int getPosition(){
+		return this.position;
+	}
+
+	public void setPosition(int p){
+		this.position = p;
+	}
 
 	@Override
 	public String toString() {
 		return "Movie [adult=" + adult + ", budget=" + budget + ", id=" + id + ", imdb_id=" + imdb_id
 				+ ", original_language=" + original_language + ", original_title=" + original_title + ", overview="
 				+ overview + ", popularity=" + popularity + ", poster_path=" + poster_path + ", backdrop_path="
-				+ backdrop_path + "]";
+				+ backdrop_path + ", position " + position + "]";
 	}
-	
-	public String getAffiche() {
-		
-		return  "https://image.tmdb.org/t/p/original" + this.getPoster_path();
+
+	private void initPosterFilm(){
+		this.posterFilm = "https://image.tmdb.org/t/p/original" + this.getPoster_path();
 	}
 	
 }
