@@ -29,22 +29,45 @@
 			<h1>Bienvenu sur watcher!!!</h1>
 			<p>Cherchez un film et ajoutez-le dans votre watchlist</p>
 		</div>
-		
+
 		<div class="search-container">
 		    <form th:action="@{/search}" th:object="${params}" method="get">
-
-		      <button type="submit"><i class="fa fa-search"></i></button>
+		      <button onclick="myFunction()"><i class="fa fa-search"></i></button>
 				<div class="dropdown">
 					<button onclick="myFunction()" class="dropbtn">Dropdown</button>
 					<div id="myDropdown" class="dropdown-content">
 						<input type="text" placeholder="Chercher un film.." name="params">
-						<tr th:each="movie: ${movies}">
-							<td th:text="${movie.original_title}" />
-							<td th:text="${movie.overview}" />
-						</tr>
-					</div>
+						<!--<tr> -->
+						 <div id="container-movies" th:each="movie: ${movies}">
+							<div class="container-movie">
+								<div class="movie">
+									<div class="movie-inside front">
+										<img src="${movie.posterFilm}"><!-- movie poster_path -->
+									</div>
+									<div class="movie-inside back">
+										<div class="movie-details">
+											<div class="movie-snap"><!-- movie backdrop_path -->
+												<img src="${movie.posterFilm}">
+											</div>
+											<h1 th:text="${movie.original_title}"><br><span th:text="${release_date}"></span></h1>
+											<ul class="movie-tags">
+												<li>Titre d'origine: <a href="#" th:text="${movie.original_title}"></a></li>
+												<li>Popularité: <a href="#" th:text="${movie.popularity}"></a></li>
+												<!--<li>votes<a href="#" th:text="${movie.vote_count}"></a></li>
+												<li>Moyenne de vote<a href="#" th:text="${movie.vote_average}"></a></li>-->
+												<li>Langue: <a href="#" th:text="${movie.original_language}"></a></li>
+											</ul>
+											<p class="movie-synopsis" th:text="${movie.overview}"></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+							<!--<td th:text="${movie.original_title}" />
+							<td th:text="${movie.overview}" />-->
+					<!--</tr> -->
 				</div>
-
+			</div>
 			</form>
   		</div>
 	</body>
