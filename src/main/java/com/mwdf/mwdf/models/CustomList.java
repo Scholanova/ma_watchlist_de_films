@@ -1,17 +1,17 @@
 package com.mwdf.mwdf.models;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "lists")
-@Data
-public class List {
+public class CustomList {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "list_id")
     private Long idList;
 
@@ -19,19 +19,21 @@ public class List {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Cascade(value = {org.hibernate.annotations.CascadeType.PERSIST, org.hibernate.annotations.CascadeType.MERGE})
     @JoinTable(
         name = "movieslists",
         joinColumns = @JoinColumn(name = "list_id"),
-        inverseJoinColumns = @JoinColumn(name = "movie_id"))
-    Set<Movie> movies;
+        inverseJoinColumns = @JoinColumn(name = "movie_id", nullable = true))
+    Set<Movie> movies  =  new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Cascade(value = {org.hibernate.annotations.CascadeType.PERSIST, org.hibernate.annotations.CascadeType.MERGE})
     @JoinTable(
         name = "userslists",
         joinColumns = @JoinColumn(name = "list_id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id"))
-    Set<User> users;
+        inverseJoinColumns = @JoinColumn(name = "user_id", nullable = false))
+    Set<User> users =  new HashSet<>();
 
     public Long getIdList() {
         return idList;
@@ -58,6 +60,19 @@ public class List {
     }
 
     public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public CustomList() {
+    }
+
+    public CustomList(String title) {
+        this.title = title;
+    }
+
+    public CustomList(String title, Set<Movie> movies, Set<User> users) {
+        this.title = title;
+        this.movies = movies;
         this.users = users;
     }
 }
