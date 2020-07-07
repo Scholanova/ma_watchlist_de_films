@@ -2,6 +2,8 @@ package com.mwdf.mwdf.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Movie {
 	
@@ -16,9 +18,19 @@ public class Movie {
 	private double popularity;
 	private String poster_path;
 	private String backdrop_path;
-
 	private String posterFilm;
-	
+	private int position;
+	private BelongsToCollection belongs_to_collection;
+	private List<Genre> genres;
+	private SpokenLanguages spoken_languages;
+	private String status;
+	private String tagline;
+	private String title;
+	private boolean video;
+	private double vote_average;
+	private int vote_count;
+	private int runtime;
+
 	public Movie() {
 		
 	}
@@ -103,26 +115,141 @@ public class Movie {
 	public void setBackdrop_path(String backdrop_path) {
 		this.backdrop_path = backdrop_path;
 	}
-
-	@Override
-	public String toString() {
-		return "Movie [adult=" + adult + ", budget=" + budget + ", id=" + id + ", imdb_id=" + imdb_id
-				+ ", original_language=" + original_language + ", original_title=" + original_title + ", overview="
-				+ overview + ", popularity=" + popularity + ", poster_path=" + poster_path + ", backdrop_path="
-				+ backdrop_path + "]";
-	}
-	
 	public String getPosterFilm() {
-		
-		return  this.getPosterFilm();
+
+		return this.posterFilm;
 	}
 
 	public void setPosterFilm(String s){
 		this.posterFilm = s;
 	}
 
+	public int getPosition(){
+		return this.position;
+	}
+
+	public void setPosition(int p){
+		this.position = p;
+	}
+
+	public BelongsToCollection getBelongs_to_collection() {
+		return belongs_to_collection;
+	}
+
+	public void setBelongs_to_collection(BelongsToCollection belongs_to_collection) {
+		this.belongs_to_collection = belongs_to_collection;
+	}
+
+	public List<Genre> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
+	}
+
+	public SpokenLanguages getSpoken_languages() {
+		return spoken_languages;
+	}
+
+	public void setSpoken_languages(SpokenLanguages spoken_languages) {
+		this.spoken_languages = spoken_languages;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getTagline() {
+		return tagline;
+	}
+
+	public void setTagline(String tagline) {
+		this.tagline = tagline;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public boolean isVideo() {
+		return video;
+	}
+
+	public void setVideo(boolean video) {
+		this.video = video;
+	}
+
+	public double getVote_average() {
+		return vote_average;
+	}
+
+	public void setVote_average(double vote_average) {
+		this.vote_average = vote_average;
+	}
+
+	public int getVote_count() {
+		return vote_count;
+	}
+
+	public void setVote_count(int vote_count) {
+		this.vote_count = vote_count;
+	}
+
+	public int getRuntime() {
+		return runtime;
+	}
+
+	public void setRuntime(int runtime) {
+		this.runtime = runtime;
+	}
+
+	@Override
+	public String toString() {
+		return "Movie{" +
+				"adult=" + adult +
+				", budget=" + budget +
+				", id=" + id +
+				", imdb_id='" + imdb_id + '\'' +
+				", original_language='" + original_language + '\'' +
+				", original_title='" + original_title + '\'' +
+				", overview='" + overview + '\'' +
+				", popularity=" + popularity +
+				", poster_path='" + poster_path + '\'' +
+				", backdrop_path='" + backdrop_path + '\'' +
+				", posterFilm='" + posterFilm + '\'' +
+				", position=" + position +
+				", belongs_to_collection=" + belongs_to_collection +
+				", genres=" + genres +
+				", spoken_languages=" + spoken_languages +
+				", status='" + status + '\'' +
+				", tagline='" + tagline + '\'' +
+				", title='" + title + '\'' +
+				", video=" + video +
+				", vote_average=" + vote_average +
+				", vote_count=" + vote_count +
+				", runtime=" + runtime +
+				'}';
+	}
+
 	private void initPosterFilm(){
 		this.posterFilm = "https://image.tmdb.org/t/p/original" + this.getPoster_path();
+	}
+
+	private String getPosterPathUrl(){
+		return "https://image.tmdb.org/t/p/original" + this.getPoster_path();
+	}
+
+	private String getBackdropPathUrl(){
+		return "https://image.tmdb.org/t/p/original" + this.getBackdrop_path();
 	}
 	
 }

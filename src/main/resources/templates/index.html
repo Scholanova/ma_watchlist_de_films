@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 	<head>
 		<title>Page d'accueil</title>
+
 		<!--<base href="/" />-->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,21 +15,12 @@
 		<script href="../static/js/bootstrap.min.js" th:href="@{/js/bootstrap.min.js}"/></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="../static/js/script.js" th:src="@{/js/script.js}"/></script>
+
 	</head>
 	<body>
-		<div class="topnav" id="myTopnav">
-		  <a class="active" href="/"><i class="fa fa-fw fa-home"></i></a>
-		  <a href="#compte"><i class="fa fa-fw fa-user"></i>Mon compte</a>
-		  <a sec:authorize="isAnonymous()" href="/inscription">Inscription</a>
-		  <a sec:authorize="isAnonymous()" href="/connexion">Connexion</a>
-		  <a sec:authorize="isAnonymous()" th:href="@{/logout}">Déconnexion</a>
-		  <a href="#about">à propos</a>
-		  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-		    <i class="fa fa-bars"></i>
-		  </a>
-		</div>
+	<header th:replace="header/header::header"></header>
 		<div class="welcome">
-			<h1>Bienvenu sur watcher!!!</h1>
+			<h1>Bienvenue sur watcher !!!</h1>
 			<p>Cherchez un film et ajoutez-le dans votre watchlist</p>
 		</div>
 
