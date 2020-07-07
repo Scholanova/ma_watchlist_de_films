@@ -22,7 +22,7 @@
 
     <div class="topnav" id="myTopnav">
         <a class="active" href="/"><i class="fa fa-fw fa-home"></i></a>
-        <a sec:authorize="isAuthenticated()" href="/user"><i class="fa fa-fw fa-user"></i>Mon compte</a>
+        <a sec:authorize="isAuthenticated()" href='/user'><i class="fa fa-fw fa-user"></i>Mon compte</a>
         <a sec:authorize="isAnonymous()" href="/inscription">Inscription</a>
         <a sec:authorize="isAnonymous()" href="/connexion">Connexion</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Déconnexion</a>
