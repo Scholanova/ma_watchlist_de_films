@@ -25,12 +25,17 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping("/user/{username}")
-    public String getUserInformation(@PathVariable("username") String username, Model model) {
-        User userInfo = userRepository.findByUsername(username);
+    @RequestMapping("/user")
+    public String getUserInformation(Model model) {
 
-        model.addAttribute("userInfos", userInfo);
-        return "information/user";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            User userInfo = userRepository.findByUsername(currentUserName);
+            model.addAttribute("userInfos", userInfo);
+            return "information/user";
+        }
+        return "connexion/connexion";
     }
 
 }
