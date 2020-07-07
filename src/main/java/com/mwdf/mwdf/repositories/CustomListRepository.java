@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface CustomListRepository extends JpaRepository<CustomList, Long> {
     List<CustomList> findByUsers(User user);
+    CustomList findByIdList(long id);
 }
