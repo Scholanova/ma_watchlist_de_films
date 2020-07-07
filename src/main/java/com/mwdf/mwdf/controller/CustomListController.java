@@ -2,8 +2,10 @@ package com.mwdf.mwdf.controller;
 
 import com.mwdf.mwdf.models.CustomList;
 import com.mwdf.mwdf.models.User;
+import com.mwdf.mwdf.repositories.CustomListRepository;
 import com.mwdf.mwdf.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,10 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@EnableAutoConfiguration
 public class CustomListController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private CustomListRepository customListRepository;
 
     @PostMapping("/create_list")
     public ModelAndView postCreateList(@RequestParam("listTitle") String title) {
@@ -40,7 +46,7 @@ public class CustomListController {
         return new ModelAndView("redirect:" + "connexion/connexion");
     }
 
-    @GetMapping("/mes_lists")
+    @GetMapping("/mes_listes")
     public ModelAndView getMyLists(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
@@ -61,6 +67,27 @@ public class CustomListController {
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
 
             return new ModelAndView("lists/newList");
+        }
+
+        return new ModelAndView("redirect:" + "connexion");
+    }
+
+    @PostMapping("/delete_list")
+    public ModelAndView deleteAList(@RequestParam("listId") long listId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+
+            User currentUser = userRepository.findByUsername(currentUserName);
+            CustomList custList = customListRepository.findByIdList(listId);
+
+            currentUser.getLists().removeIf(cl -> cl.getIdList().equals(custList.getIdList()));
+//            custList.getUsers().removeIf(u -> u.getIdUser().equals(currentUser.getIdUser())); need to be fixed, doesnt work
+            custList.getUsers().clear();
+
+            customListRepository.save(custList);
+
+            return new ModelAndView("redirect:" + "/mes_listes");
         }
 
         return new ModelAndView("redirect:" + "connexion");

@@ -92,5 +92,33 @@ public class CustomListRepositoryTest {
             // Then
             assertThat(customListRepository.findByUsers(userSaved).get(0).getMovies().stream().findFirst().get().getApiFilmId()).isEqualTo(6);
         }
+
+        @Test
+        void whenDeleteAlist_thenUserDontHaveListAnymore() {
+            // Given
+            User user = new User("dzeq", "azaz", "cy", "ril", Collections.singleton(RoleEnum.USER));
+            CustomList list = new CustomList("maList");
+            list.getUsers().add(user);
+            user.getLists().add(list);
+            userRepository.save(user);
+
+            User userSaved = userRepository.findByUsername("dzeq");
+
+            CustomList savedList = customListRepository.findByIdList(list.getIdList());
+
+//             When
+            userSaved.getLists().removeIf(l -> l.getIdList().equals(savedList.getIdList()));
+            savedList.getUsers().removeIf(u -> u.getIdUser().equals(userSaved.getIdUser()));
+
+            assertThat(userRepository.findByUsername("dzeq").getLists().size()).isEqualTo(1);
+
+            customListRepository.save(savedList);
+
+            // Then
+            assertThat(userRepository.findByUsername(userSaved.getUsername()).getLists()).isEmpty();
+            assertThat(userRepository.findByUsername("dzeq").getLists().size()).isEqualTo(0);
+            assertThat(userRepository.findByUsername(userSaved.getUsername()).getIdUser()).isEqualTo(userSaved.getIdUser());
+            assertThat(customListRepository.findByIdList(savedList.getIdList()).getIdList()).isEqualTo(savedList.getIdList());
+        }
     }
 }
