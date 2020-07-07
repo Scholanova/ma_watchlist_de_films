@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 		<title>Page d'accueil</title>
 		<!--<base href="/" />-->
@@ -16,10 +18,10 @@
 	<body>
 		<div class="topnav" id="myTopnav">
 		  <a class="active" href="/"><i class="fa fa-fw fa-home"></i></a>
-		  <a href="#compte"><i class="fa fa-fw fa-user"></i>Mon compte</a>
+		  <a sec:authorize="isAuthenticated()" href="/user"><i class="fa fa-fw fa-user"></i>Mon compte</a>
 		  <a sec:authorize="isAnonymous()" href="/inscription">Inscription</a>
-		  <a sec:authorize="isAnonymous()" href="/connexion">Connexion</a>
-		  <a sec:authorize="isAnonymous()" th:href="@{/logout}">Déconnexion</a>
+		  <a sec:authorize="isAuthenticated()" href="/connexion">Connexion</a>
+		  <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Déconnexion</a>
 		  <a href="#about">à propos</a>
 		  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
 		    <i class="fa fa-bars"></i>
