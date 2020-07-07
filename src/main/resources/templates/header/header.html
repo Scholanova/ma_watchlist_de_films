@@ -1,18 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
+      <head>
+		<title>Page d'accueil</title>
+		<!--<base href="/" />-->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+		<link href="../static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link href="../static/js/bootstrap.js" rel="stylesheet" th:href="@{/js/bootstrap.js}"/>
+		<link href="../static/js/bootstrap.min.js" rel="stylesheet" th:href="@{/js/bootstrap.min.js}"/>
+		<link href="../static/css/accueil.css" rel="stylesheet" th:href="@{/css/accueil.css}"/>
+	</head>
 <body>
-<header th:fragment="header">
-    <nav>
-        <a th:href="@{/}">Page d'accueil</a>
-        <a sec:authorize="isAnonymous()" th:href="@{/connexion}">Se connecter</a>
-        <a sec:authorize="isAnonymous()" th:href="@{/inscription}">S'inscrire</a>
-        <a sec:authorize="isAnonymous()" th:href="@{/logout}">Déconnexion</a>
-        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-            <input type="submit" value="Logout" />
-        </form>
-    </nav>
-</header>
+
+	<header th:fragment="header">
+		<div class="topnav" id="myTopnav">
+			  <a class="active" th:href="@{/}"><i class="fa fa-fw fa-home"></i></a>
+			  <a sec:authorize="isAnonymous()" th:href="inscription">Inscription</a>
+			  <a sec:authorize="isAnonymous()" th:href="connexion">Connexion</a>
+			  <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+	            <input type="submit" value="Logout" />
+	        </form>
+			  <a href="#about">Ã  propos</a>
+			  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+			    <i class="fa fa-bars"></i>
+			  </a>
+		</div>
+	    <!--<nav>
+	        <a th:href="@{/}">Page d'accueil</a>
+	        <a sec:authorize="isAnonymous()" th:href="@{/connexion}">Se connecter</a>
+	        <a sec:authorize="isAnonymous()" th:href="@{/inscription}">S'inscrire</a>
+	        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+	            <input type="submit" value="Logout" />
+	        </form>
+	    </nav> -->
+	</header>
+
 </body>
 </html>

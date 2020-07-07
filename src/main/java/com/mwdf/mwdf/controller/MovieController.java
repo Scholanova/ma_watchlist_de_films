@@ -64,21 +64,7 @@ public class MovieController {
 	@RequestMapping(value="/search",method = RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView searchMovies(@RequestParam String params, Model model) {
-		/*
-		String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
-		return movieService.getUrlContent(url);
-		*/
-		
-		String json = movieService.searchMovies(params);
-		Result res = new Result();
-		
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			res = mapper.readValue(json, Result.class);
-
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
+		Result res = movieService.searchMovies(params);
 		model.addAttribute("movies", res.getResults());
 		return new ModelAndView("index");
 
@@ -149,8 +135,10 @@ public class MovieController {
 	}
 	@RequestMapping("/movie/random")
 	@ResponseBody
-	public String randomMovie() {
-		return movieService.getRandomMovie();
+	public String randomMovie(Model model) {
+		Movie movie = movieService.getRandomMovie();
+		model.addAttribute("movie", movie);
+		return model.toString();
 	}
 	public String getUrlContent(String lien) {
 		StringBuilder sb = new StringBuilder();

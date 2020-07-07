@@ -11,21 +11,11 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -55,6 +45,12 @@ public class User implements UserDetails {
     private String lastname;
 
     @ElementCollection(targetClass = RoleEnum.class, fetch = FetchType.EAGER)
+    @Cascade(value = CascadeType.REMOVE)
+    @JoinTable(
+            indexes = {@Index(name = "INDEX_USER_ROLE", columnList = "user_id")},
+            name = "roles",
+            joinColumns = @JoinColumn(name = "user_id")
+    )
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private Collection<RoleEnum> roles;
@@ -70,6 +66,18 @@ public class User implements UserDetails {
 
     @Column(name = "enabled")
     private boolean enabled;
+
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    @Cascade(value = {CascadeType.PERSIST, CascadeType.MERGE})
+    Set<CustomList> lists = new HashSet<>();
+
+    public void setLists(Set<CustomList> lists) {
+        this.lists = lists;
+    }
+
+    public Set<CustomList> getLists() {
+        return lists;
+    }
 
     public User() {
         this.accountNonExpired = true;
