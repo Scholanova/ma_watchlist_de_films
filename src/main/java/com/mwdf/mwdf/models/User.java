@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private Long idUser;
 
@@ -89,7 +89,7 @@ public class User implements UserDetails {
 
     public User(String username, String password, String firstname, String lastname, Collection<RoleEnum> roles) {
         this.username = username;
-        this.password = password;
+        this.password = BCryptManagerUtil.passwordencoder().encode(password);
         this.firstname = firstname;
         this.lastname = lastname;
         this.accountNonExpired = true;
