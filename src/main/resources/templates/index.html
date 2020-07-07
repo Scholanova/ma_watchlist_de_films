@@ -1,34 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>Page d'accueil</title>
-		<!--<base href="/" />-->
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
-		<link href="../static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<link href="../static/js/bootstrap.js" rel="stylesheet" th:href="@{/js/bootstrap.js}"/>
-		<link href="../static/js/bootstrap.min.js" rel="stylesheet" th:href="@{/js/bootstrap.min.js}"/>
-		<link href="../static/css/accueil.css" rel="stylesheet" th:href="@{/css/accueil.css}"/>
 	</head>
 	<body>
-		<div class="topnav" id="myTopnav">
-		  <a class="active" href="/"><i class="fa fa-fw fa-home"></i></a>
-		  <a sec:authorize="isAuthenticated()" href="/user"><i class="fa fa-fw fa-user"></i>Mon compte</a>
-		  <a sec:authorize="isAnonymous()" href="/inscription">Inscription</a>
-		  <a sec:authorize="isAuthenticated()" href="/connexion">Connexion</a>
-		  <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Déconnexion</a>
-		  <a href="#about">à propos</a>
-		  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-		    <i class="fa fa-bars"></i>
-		  </a>
-		</div>
+	<header th:replace="header/header::header"></header>
 		<div class="welcome">
-			<h1>Bienvenu sur watcher!!!</h1>
+			<h1>Bienvenue sur watcher !!!</h1>
 			<p>Cherchez un film et ajoutez-le dans votre watchlist</p>
 		</div>
 		
@@ -46,7 +24,6 @@
 						</tr>
 					</div>
 				</div>
-
 			</form>
   		</div>
 	</body>
