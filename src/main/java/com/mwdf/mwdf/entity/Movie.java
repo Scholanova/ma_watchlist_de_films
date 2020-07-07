@@ -18,6 +18,8 @@ public class Movie {
 	private String backdrop_path;
 
 	private String posterFilm;
+
+	private int position;
 	
 	public Movie() {
 		
@@ -103,22 +105,29 @@ public class Movie {
 	public void setBackdrop_path(String backdrop_path) {
 		this.backdrop_path = backdrop_path;
 	}
+	public String getPosterFilm() {
+
+		return this.posterFilm;
+	}
+
+	public void setPosterFilm(String s){
+		this.posterFilm = s;
+	}
+
+	public int getPosition(){
+		return this.position;
+	}
+
+	public void setPosition(int p){
+		this.position = p;
+	}
 
 	@Override
 	public String toString() {
 		return "Movie [adult=" + adult + ", budget=" + budget + ", id=" + id + ", imdb_id=" + imdb_id
 				+ ", original_language=" + original_language + ", original_title=" + original_title + ", overview="
 				+ overview + ", popularity=" + popularity + ", poster_path=" + poster_path + ", backdrop_path="
-				+ backdrop_path + "]";
-	}
-	
-	public String getPosterFilm() {
-		
-		return  this.getPosterFilm();
-	}
-
-	public void setPosterFilm(String s){
-		this.posterFilm = s;
+				+ backdrop_path + ", position " + position + "]";
 	}
 
 	private void initPosterFilm(){
