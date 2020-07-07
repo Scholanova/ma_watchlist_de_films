@@ -8,10 +8,18 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import com.mwdf.mwdf.models.CustomList;
+import com.mwdf.mwdf.models.User;
+import com.mwdf.mwdf.repositories.CustomListRepository;
+import com.mwdf.mwdf.repositories.MovieRepository;
+import com.mwdf.mwdf.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.PropertySource;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,13 +45,19 @@ public class MovieController {
 
 	@Value("${apidb.token}")
 	private String TOKEN;
-	
+
 	private String LANG = "fr-FR";
 	private MovieService movieService;
-	
-	public MovieController(MovieService movieService) {
+	private UserRepository userRepository;
+	private CustomListRepository customListRepository;
+	private MovieRepository movieRepository;
+
+	public MovieController(MovieService movieService, MovieRepository movieRepository, CustomListRepository customListRepository, UserRepository userRepository) {
 		super();
 		this.movieService = movieService;
+		this.customListRepository = customListRepository;
+		this.userRepository = userRepository;
+		this.movieRepository = movieRepository;
 	}
 
 	
@@ -66,8 +80,18 @@ public class MovieController {
 	public ModelAndView searchMovies(@RequestParam String params, Model model) {
 		Result res = movieService.searchMovies(params);
 		model.addAttribute("movies", res.getResults());
-		return new ModelAndView("index");
 
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			String currentUserName = authentication.getName();
+
+			User user = userRepository.findByUsername(currentUserName);
+			model.addAttribute("lists", user.getLists());
+
+			return new ModelAndView("lists/myLists");
+		}
+
+		return new ModelAndView("index");
 	}
 
 	@RequestMapping("/movie/{id}")
@@ -162,5 +186,21 @@ public class MovieController {
 			e.printStackTrace();
 		}
 		return sb.toString();
+	}
+
+	@PostMapping("/movie_to_list")
+	public ModelAndView addMovieToAList(@RequestParam("listId") long listId, @RequestParam("apiFilmId") int apiFilmId) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			String currentUserName = authentication.getName();
+
+			com.mwdf.mwdf.models.Movie movie = new com.mwdf.mwdf.models.Movie(apiFilmId);
+			CustomList list = customListRepository.findByIdList(listId);
+			list.getMovies().add(movie);
+
+			customListRepository.save(list);
+		}
+
+		return new ModelAndView("redirect:" + "connexion/connexion");
 	}
 }
