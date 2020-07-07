@@ -26,8 +26,11 @@ public class UserController {
     private UserRepository userRepository;
 
     @RequestMapping("/user/{username}")
-    public String getUserInformation(@PathVariable("username") String username) {
+    public String getUserInformation(@PathVariable("username") String username, Model model) {
+        User userInfo = userRepository.findByUsername(username);
 
+        model.addAttribute("userInfos", userInfo);
+        return "information/user";
     }
 
 }

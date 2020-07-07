@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:replace="header/header::header"></header>
+
+<div>
+    <div>
+        <form th:action="@{/user}" method="post">
+            <fieldset>
+                <th:block th:each="userInfo : ${userInfos}">
+                    <div>
+                        <label for="username-change">Nom d'utilisateur</label>
+                        <input type="text" th:value="${userInfos.username}" id="username-change" name="username" placeholder="Nom d'utilisateur" disabled/>
+                    </div>
+                    <div>
+                        <label for="firstname-change">Prenom</label>
+                        <input type="text" th:value="${userInfos.firstname}" id="firstname-change" name="firstname" placeholder="Prenom" disabled/>
+                    </div>
+                    <div>
+                        <label for="lastname-change">Nom</label>
+                        <input type="text" th:value="${userInfos.lastname}" id="lastname-change" name="lastname" placeholder="Nom" disabled/>
+                    </div>
+                </th:block>
+
+                <input id="change-valid-button" type="button" value="Modifier">
+
+            </fieldset>
+        </form>
+
+
+</div>
+    <script type="text/javascript" th:src="@{/js/modifyInformation.js}"></script>
+</html>
