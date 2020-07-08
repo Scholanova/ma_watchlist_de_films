@@ -84,8 +84,14 @@ public class MovieController {
 
 			User user = userRepository.findByUsername(currentUserName);
 			model.addAttribute("lists", user.getLists());
-		}
+			if ( user.getLists().size()== 0)
+				model.addAttribute("redirect",0);
+			else
+				model.addAttribute("redirect",1);
 
+		}
+		else
+			model.addAttribute("redirect",2);
 		return new ModelAndView("index");
 	}
 
@@ -185,6 +191,7 @@ public class MovieController {
 
 	@PostMapping("/movie_to_list")
 	public ModelAndView addMovieToAList(@RequestParam("listId") long listId, @RequestParam("apiFilmId") int apiFilmId) {
+		System.out.println("listId: "+listId+"/n apiFilmId: "+ apiFilmId);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 			String currentUserName = authentication.getName();
@@ -196,7 +203,7 @@ public class MovieController {
 			customListRepository.save(list);
 		}
 
-		return new ModelAndView("redirect:" + "connexion/connexion");
+		return new ModelAndView("redirect:" + "/mes_listes");
 	}
 
 	@GetMapping("/list/{listTitle}_{listId}")
