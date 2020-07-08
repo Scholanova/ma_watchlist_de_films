@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <title>Page d'accueil</title>
@@ -110,6 +110,7 @@
 		<p>Aucun film trouvé !</p>
 	</span>
 </span>
+<div sec:authorize="isAuthenticated()">
 <span th:if="${movies == null}">
 	<div class="welcome">
 		<h1>Recommandation</h1>
@@ -155,7 +156,8 @@
 			</div>
 		</div>
 	</div>
-	</span>
+</span>
+</div>
 </body>
 <script type="text/javascript" th:src="@{/js/enableBtnSearch.js}"></script>
 </html>
