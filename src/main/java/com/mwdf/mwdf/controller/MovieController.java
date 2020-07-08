@@ -222,7 +222,9 @@ public class MovieController {
 			List<Movie> movies = new ArrayList<Movie>();
 
 			for (com.mwdf.mwdf.models.Movie movie : list.getMovies()) {
-				movies.add(movieService.getMovie(movie.getApiFilmId()));
+				Movie apiMovie = movieService.getMovie(movie.getApiFilmId());
+				apiMovie.setComments(movie.getComment());
+				movies.add(apiMovie);
 			}
 
 			model.addAttribute("movies", movies);
@@ -235,7 +237,6 @@ public class MovieController {
 		return "connexion/connexion";
 	}
 
-<<<<<<< HEAD
 	@GetMapping("/genres")
 	@ResponseBody
 	public String getGenres(){
