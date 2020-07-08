@@ -19,5 +19,6 @@ public interface MovieService {
     public Movie getRandomMovie();
     public GenreResult getAllGenre();
     public Movie getRandomMovieGenre(int idGenre);
+    public Movie getPopularMovie();
 
 }
