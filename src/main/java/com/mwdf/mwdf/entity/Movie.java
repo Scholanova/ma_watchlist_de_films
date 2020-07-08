@@ -1,6 +1,7 @@
 package com.mwdf.mwdf.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.mwdf.mwdf.models.Comment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public class Movie {
 	private boolean adult;
 	private long budget;
 	private int id;
+	private List<Comment> comments;
 	private String imdb_id;
 	private String original_language;
 	private String original_title;
@@ -114,6 +116,14 @@ public class Movie {
 
 	public String getBackdrop_path() {
 		return backdrop_path;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	public void setBackdrop_path(String backdrop_path) {

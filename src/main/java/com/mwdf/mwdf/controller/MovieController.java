@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mwdf.mwdf.entity.Genre;
+import com.mwdf.mwdf.models.Comment;
 import com.mwdf.mwdf.models.CustomList;
 import com.mwdf.mwdf.models.User;
+import com.mwdf.mwdf.repositories.CommentRepository;
 import com.mwdf.mwdf.repositories.CustomListRepository;
 import com.mwdf.mwdf.repositories.MovieRepository;
 import com.mwdf.mwdf.repositories.UserRepository;
@@ -49,13 +51,15 @@ public class MovieController {
 	private UserRepository userRepository;
 	private CustomListRepository customListRepository;
 	private MovieRepository movieRepository;
+	private CommentRepository commentRepository;
 
-	public MovieController(MovieService movieService, MovieRepository movieRepository, CustomListRepository customListRepository, UserRepository userRepository) {
+	public MovieController(MovieService movieService, MovieRepository movieRepository, CustomListRepository customListRepository, UserRepository userRepository, CommentRepository commentRepository) {
 		super();
 		this.movieService = movieService;
 		this.customListRepository = customListRepository;
 		this.userRepository = userRepository;
 		this.movieRepository = movieRepository;
+		this.commentRepository = commentRepository;
 	}
 
 	
@@ -218,11 +222,15 @@ public class MovieController {
 			List<Movie> movies = new ArrayList<Movie>();
 
 			for (com.mwdf.mwdf.models.Movie movie : list.getMovies()) {
-				movies.add(movieService.getMovie(movie.getApiFilmId()));
+				Movie apiMovie = movieService.getMovie(movie.getApiFilmId());
+				apiMovie.setComments(movie.getComment());
+				movies.add(apiMovie);
 			}
 
 			model.addAttribute("movies", movies);
 			model.addAttribute("listTitle", listTitle);
+			model.addAttribute("idList", listId);
+
 			return "lists/myList";
 		}
 
@@ -237,8 +245,51 @@ public class MovieController {
 	}
 	@GetMapping("/randomGenre")
 	@ResponseBody
-	public String getRandom(@RequestParam("idGenre") int idGenre){
+	public String getRandom(@RequestParam("idGenre") int idGenre) {
 
 		return movieService.getRandomMovieGenre(idGenre).toString();
+	}
+
+	@GetMapping("/delete_movie")
+	public ModelAndView deleteMovieFromList(@RequestParam int movieId, @RequestParam long listId){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			CustomList list = customListRepository.findByIdList(listId);
+			List<com.mwdf.mwdf.models.Movie> movieList = movieRepository.findByApiFilmIdAndLists(movieId, list);
+
+			com.mwdf.mwdf.models.Movie movie = movieList.stream().findFirst().get();
+			movie.getLists().removeIf(m -> m.getIdList().equals(listId));
+			list.getMovies().removeIf(l -> l.getIdMovie().equals(movie.getIdMovie()));
+
+			movieRepository.save(movie);
+			customListRepository.save(list);
+
+			return new ModelAndView("redirect:" + "/list/" + list.getTitle() + "_" + listId);
+		}
+
+		return new ModelAndView("connexion");
+	}
+
+	@PostMapping("/add_comment")
+	public ModelAndView PostCommentToMovie(@RequestParam String commentContent, @RequestParam int idMovie, @RequestParam long listId){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			String userName = authentication.getName();
+
+			User currentUser = userRepository.findByUsername(userName);
+			CustomList list = customListRepository.findByIdList(listId);
+			List<com.mwdf.mwdf.models.Movie> movieList = movieRepository.findByApiFilmIdAndLists(idMovie, list);
+
+			for (com.mwdf.mwdf.models.Movie movie: movieList) {
+				Comment comment = new Comment(commentContent);
+				comment.setUser(currentUser);
+				comment.setMovie(movie);
+				commentRepository.save(comment);
+			}
+
+			return new ModelAndView("redirect:" + "/list/" + list.getTitle() + "_" + listId);
+		}
+
+		return new ModelAndView("connexion");
 	}
 }

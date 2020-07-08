@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Comparator;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Controller
 @EnableAutoConfiguration
 public class CustomListController {
@@ -54,7 +59,12 @@ public class CustomListController {
 
             User user = userRepository.findByUsername(currentUserName);
 
-            model.addAttribute("lists", user.getLists());
+            Set<CustomList> lists = user.getLists();
+            Set<CustomList> sortedList = lists.stream()
+                    .sorted(Comparator.comparing(CustomList::getTitle)).collect(Collectors.toCollection(LinkedHashSet::new));
+
+            model.addAttribute("lists", sortedList);
+
             return new ModelAndView("lists/myLists");
         }
 

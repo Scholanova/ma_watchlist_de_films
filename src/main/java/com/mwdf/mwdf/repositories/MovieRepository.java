@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
     List<Movie> findByLists(CustomList list);
+    Movie findByIdMovie(long id);
+    List<Movie> findByApiFilmIdAndLists(int id, CustomList list);
 }

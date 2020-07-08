@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <title th:text="${listTitle}"></title>
@@ -7,7 +7,7 @@
 <body>
 <script type="application/javascript" src="../js/jquery.min.js" th:scr="@{/js/jquery.min.js}"></script>
 <link rel="stylesheet" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">
-<header th:replace="header/header::header">	</header>
+<header th:replace="header/header::header"></header>
 <div class="welcome">
     <h1 th:text="${'Ma liste : ' + listTitle}"></h1>
 </div>
@@ -21,33 +21,51 @@
 <div id="container-movies">
     <div class="container-movie" th:each="movie: ${movies}">
         <div class="movie">
-            <div class="movie-inside front">
-                <img th:src="${movie.getPosterPathUrl()}"><!-- movie poster_path -->
-            </div>
-            <div class="movie-inside back">
-                <div class="movie-details">
-                    <div class="movie-snap"><!-- movie backdrop_path -->
-                        <img th:src="${movie.getBackdropPathUrl()}">
-                    </div>
-                    <h1 th:text="${movie.original_title}"><br><span th:text="${release_date}"></span></h1>
-                    <ul>
-                        <li>Titre d'origine: <span href="#" th:text="${movie.original_title}"></span></li>
-                        <li>Popularité: <span href="#" th:text="${movie.popularity}"></span></li>
-                        <!--<li>votes: <span href="#" th:text="${movie.vote_count}"></span></li>
-                        <li>Moyenne de vote: <a href="#" th:text="${movie.vote_average}"></a></li>-->
-                        <li>Langue: <span href="#" th:text="${movie.original_language}"></span></li>
-                        <li>Test1: <span href="#" th:text="${movie.posterFilm}"></span></li>
-                        <li>Test2: <span href="#" th:text="${movie.getPosterPathUrl()}"></span></li>
-                    </ul>
-                    <div class="movie-synopsis" th:text="${movie.overview}"></div>
-                </div>
+            <div class="flip-card">
+							<div class="flip-card-inner">
+								<div class="flip-card-front">
+									<img th:src="${movie.getPosterPathUrl()}" alt="frontPoster"
+                                         style="width:100%;height:100%;">
+								</div>
+								<div class="flip-card-back">
+									<div class="movie-snap">
+										<img th:src="${movie.getBackdropPathUrl()}" alt="backPoster"
+                                             style="width:100%;height:100%;">
+									</div>
+									<h1 th:text="${movie.title}"></h1>
+									<br>
+									<p><span th:text="${movie.release_date}"></span> <span
+                                            th:text="${movie.runtime}"></span></p>
+									<p>Titre d'origine: <span th:text="${movie.original_title}"></span></p>
+<!--                                    										<p>Collection: <span th:text="${movie?.belongs_to_collection?.name}"></span></p>-->
+                                    <!--										<p>Genres: <span th:text="${movie?.genres.get(0).name}"></span></p>-->
+									<p>Moyenne de vote: <span th:text="${movie?.vote_average}"></span></p>
+                                    <!--										<p>Langues: <span th:text="${movie?.spoken_languages.get(0)?.name}"></span></p>-->
+									<div class="movie-synopsis" th:text="${movie?.overview}"></div>
+								</div>
+							</div>
+						</div>
                 <div class="btn-group">
-                    <a href="#" style="text-align:center">Ajouter à ma Watchlist</a>
+                    <form th:action="@{/add_comment}" method="post">
+                        <input type="hidden" th:value="${movie.id}" name="idMovie" id="idMovie">
+                        <input type="text" placeholder="Ajouter un commentaire sur ce film ici" name="commentContent"
+                               id="commentContent">
+                        <input type="hidden" th:value="${listId}" name="listId" id="listId">
+                        <input type="submit" style="text-align:center" value="Commenter">
+                    </form>
+                    <a th:href="${'/delete_movie?movieId='+movie.id+'&listId='+listId}"><button type="submit"
+                                                                                        class="btn btn-default"><span
+                            class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></a>
                 </div>
+            </div>
+        <div>fsdfds
+            <div th:each="comment: ${movie.comments}">
+                <p th:text="${comment.content}">frggse</p>
             </div>
         </div>
+        </div>
     </div>
-</div>
+    </div>
 </span>
 </body>
 </html>
