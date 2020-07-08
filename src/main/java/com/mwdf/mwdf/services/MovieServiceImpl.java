@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class MovieServiceImpl implements MovieService{
@@ -32,7 +34,7 @@ public class MovieServiceImpl implements MovieService{
 
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
-                System.out.println(inputLine);
+                //System.out.println(inputLine);
                 sb.append(inputLine);
             }
             in.close();
@@ -54,6 +56,14 @@ public class MovieServiceImpl implements MovieService{
     }
 
     public Result searchMovies(String params) {
+        System.out.println("parma " + params);
+        if(params.isEmpty()){
+            //return new Result();
+            return null;
+        }
+        else{
+            params = params.replaceAll(" ","%20");
+        }
     	String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
         String json = getUrlContent(url);
         Result res = new Result();
@@ -66,10 +76,23 @@ public class MovieServiceImpl implements MovieService{
             e.printStackTrace();
         }
 
+        List<Movie> updatedMovie = new ArrayList<Movie>();
         for(Movie movie : res.getResults()){
+            movie = getMovie(movie.getId());
             movie.initPosterFilm();
             movie.initBackDropFilm();
+            movie.initGenreIfNull();
+            movie.initBelongs_To_CollentionIfNull();
+            movie.initSpoken_languagesIfNull();
+            updatedMovie.add(movie);
         }
+        /*
+        for(Movie movie : res.getResults()){
+            System.out.println(movie);
+        }
+        */
+
+        res.setResults(updatedMovie);
         initMoviePosition(res);
         return res;
     }

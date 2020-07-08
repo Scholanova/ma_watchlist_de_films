@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${listTitle}"></title>
+</head>
+<body>
+<script type="application/javascript" src="../js/jquery.min.js" th:scr="@{/js/jquery.min.js}"></script>
+<link rel="stylesheet" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">
+<header th:replace="header/header::header">	</header>
+<div class="welcome">
+    <h1 th:text="${'Ma liste : ' + listTitle}"></h1>
+</div>
+<span th:if="${movies.isEmpty()}">
+<div class="welcome">
+    <h2 style="text-align:center">Votre liste est vide.<br><a th:href="${'/'}"> Ajoutez des films </a></h2>
+</div>
+</span>
+
+<span th:unless="${movies.isEmpty()}">
+<div id="container-movies">
+    <div class="container-movie" th:each="movie: ${movies}">
+        <div class="movie">
+            <div class="movie-inside front">
+                <img th:src="${movie.getPosterPathUrl()}"><!-- movie poster_path -->
+            </div>
+            <div class="movie-inside back">
+                <div class="movie-details">
+                    <div class="movie-snap"><!-- movie backdrop_path -->
+                        <img th:src="${movie.getBackdropPathUrl()}">
+                    </div>
+                    <h1 th:text="${movie.original_title}"><br><span th:text="${release_date}"></span></h1>
+                    <ul>
+                        <li>Titre d'origine: <span href="#" th:text="${movie.original_title}"></span></li>
+                        <li>Popularité: <span href="#" th:text="${movie.popularity}"></span></li>
+                        <!--<li>votes: <span href="#" th:text="${movie.vote_count}"></span></li>
+                        <li>Moyenne de vote: <a href="#" th:text="${movie.vote_average}"></a></li>-->
+                        <li>Langue: <span href="#" th:text="${movie.original_language}"></span></li>
+                        <li>Test1: <span href="#" th:text="${movie.posterFilm}"></span></li>
+                        <li>Test2: <span href="#" th:text="${movie.getPosterPathUrl()}"></span></li>
+                    </ul>
+                    <div class="movie-synopsis" th:text="${movie.overview}"></div>
+                </div>
+                <div class="btn-group">
+                    <a href="#" style="text-align:center">Ajouter à ma Watchlist</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</span>
+</body>
+</html>

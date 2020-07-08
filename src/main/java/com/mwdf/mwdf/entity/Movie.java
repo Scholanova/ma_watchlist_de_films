@@ -2,6 +2,7 @@ package com.mwdf.mwdf.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -31,6 +32,8 @@ public class Movie {
 	private double vote_average;
 	private int vote_count;
 	private int runtime;
+
+	private String release_date;
 
 	public Movie() {
 		
@@ -213,6 +216,22 @@ public class Movie {
 		this.runtime = runtime;
 	}
 
+	public String getRelease_date() {
+		return release_date;
+	}
+
+	public void setRelease_date(String release_date) {
+		this.release_date = release_date;
+	}
+
+	public String getPoster2Film() {
+		return poster2Film;
+	}
+
+	public void setPoster2Film(String poster2Film) {
+		this.poster2Film = poster2Film;
+	}
+
 	@Override
 	public String toString() {
 		return "Movie{" +
@@ -227,6 +246,7 @@ public class Movie {
 				", poster_path='" + poster_path + '\'' +
 				", backdrop_path='" + backdrop_path + '\'' +
 				", posterFilm='" + posterFilm + '\'' +
+				", poster2Film='" + poster2Film + '\'' +
 				", position=" + position +
 				", belongs_to_collection=" + belongs_to_collection +
 				", genres=" + genres +
@@ -238,6 +258,7 @@ public class Movie {
 				", vote_average=" + vote_average +
 				", vote_count=" + vote_count +
 				", runtime=" + runtime +
+				", release_date='" + release_date + '\'' +
 				'}';
 	}
 
@@ -256,5 +277,24 @@ public class Movie {
 	public String getBackdropPathUrl(){
 		return "https://image.tmdb.org/t/p/original" + this.getBackdrop_path();
 	}
-	
+
+	public void initGenreIfNull(){
+		if(this.genres == null || this.genres.size() ==0){
+			this.genres = new ArrayList<Genre>();
+			this.genres.add(new Genre(-1, "No Genre"));
+		}
+	}
+
+	public void initBelongs_To_CollentionIfNull(){
+		if(this.belongs_to_collection == null){
+			this.belongs_to_collection = new BelongsToCollection(-1, "No Collection", "", "");
+		}
+	}
+
+	public void initSpoken_languagesIfNull(){
+		if(this.spoken_languages == null || this.spoken_languages.size()==0){
+			this.spoken_languages = new ArrayList<SpokenLanguages>();
+			this.spoken_languages.add(new SpokenLanguages("-1", "No Spoken Language"));
+		}
+	}
 }
