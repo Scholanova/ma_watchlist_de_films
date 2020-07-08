@@ -37,4 +37,13 @@ function operateFormatter(value, row, index) {
     '</a>',
     '</div>'
   ].join('')
+
+
+}
+
+function redirectLogin() {
+
+
+window.location.replace("/");
+
 }
