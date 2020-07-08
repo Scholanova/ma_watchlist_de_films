@@ -202,9 +202,11 @@ public class MovieController {
 			list.getMovies().add(movie);
 
 			customListRepository.save(list);
+
+			return new ModelAndView("redirect:" + "/mes_listes");
 		}
 
-		return new ModelAndView("redirect:" + "/mes_listes");
+		return new ModelAndView("redirect:" + "/connexion");
 	}
 
 	@GetMapping("/list/{listTitle}_{listId}")
