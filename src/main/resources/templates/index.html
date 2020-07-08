@@ -10,43 +10,74 @@
 	<header th:replace="header/header::header">	</header>
 		<div class="welcome">
 			<h1>Bienvenue sur watcher !!!</h1>
-			<p>Cherchez un film et ajoutez-le dans votre watchlist</p>
+			<p>Cherchez un film et ajoutez-le � votre watchlist</p>
 		</div>
 
 
 		<div class="search-container">
 		    <form class="example" th:action="@{/search}" th:object="${params}" method="get">
-				<input type="text" placeholder="Chercher un film.." name="params">
-				<button type="submit"><i class="fa fa-search"></i></button>
+			    <div class="input-group">
+	        		<input class="form-control border-right-0" placeholder="Chercher un film.." name="params">
+			        <span class="input-group-append border-left-0">
+			            <span class="input-group-text" type="submit">
+			                <i class="fa fa-search" type="submit" style="border: none;"></i>
+			            </span>
+			        </span>
+	    		</div>
+				<!--<input type="text" placeholder="Chercher un film.." name="params">
+				<button ><i class="fa fa-search" type="submit"></i></button> -->
 				<div id="container-movies">
 					<div class="container-movie" th:each="movie: ${movies}">
 						<div class="movie">
+							<div class="flip-card">
+								<div class="flip-card-inner">
+								    <div class="flip-card-front">
+								    	<img src="${movie.getPosterPathUrl}" alt="frontPoster" style="width:300px;height:300px;">
+								    </div>
+								    <div class="flip-card-back">
+								    	<div class="movie-snap">
+												<img src="${movie.getBackdropPathUrl()}" alt="backPoster" style="width:300px;height:300px;">
+										</div>
+									    <h1 th:text="${movie.title}"></h1>
+									    <br>
+									    <p><span th:text="${movie.runtime}"></span></p><!-- <span th:text="${movie.release_date}"></span>  -->
+									    <p>Titre d'origine: <span href="#" th:text="${movie.original_title}"></span></p>
+									    <!--<p>Collection: <span href="#" th:text="${movie.belongs_to_collection"></span></p>-->
+									    <p>Genres: <span href="#" th:text="${movie.genres}"></span></p>
+									    <p>Moyenne de vote: <span href="#" th:text="${movie.vote_average}"></span></p>
+									    <!--<p>Langues: <span href="#" th:text="${movie.spoken_languages}"></span></p>-->
+									    <div class="movie-synopsis" th:text="${movie.overview}"></div>
+								    </div>
+							  	</div>
+							</div>
+							<div class="btn-group">
+								<a href="#" style="text-align:center;text-decoration:none">Ajouter à ma Watchlist</a>
+							</div>
+						</div>
+						<!--<div class="movie">
 							<div class="movie-inside front">
-								<img th:src="${movie.getPosterPathUrl()}"><!-- movie poster_path -->
+								<img src="${movie.getPosterPathUrl}">
 							</div>
 							<div class="movie-inside back">
 								<div class="movie-details">
-									<div class="movie-snap"><!-- movie backdrop_path -->
-										<img th:src="${movie.getBackdropPathUrl()}">
+									<div class="movie-snap">
+										<img src="${movie.getBackdropPathUrl()}">
 									</div>
-									<h1 th:text="${movie.original_title}"><br><span th:text="${release_date}"></span></h1>
+									<h1 th:text="${movie.title}"><br><span th:text="${movie.release_date}"></span><br><span th:text="${movie.runtime}"></span></h1>
 									<ul>
 										<li>Titre d'origine: <span href="#" th:text="${movie.original_title}"></span></li>
-										<li>Popularité: <span href="#" th:text="${movie.popularity}"></span></li>
-										<!--<li>votes: <span href="#" th:text="${movie.vote_count}"></span></li>
-										<li>Moyenne de vote: <a href="#" th:text="${movie.vote_average}"></a></li>-->
-										<li>Langue: <span href="#" th:text="${movie.original_language}"></span></li>
-										<li>Test1: <span href="#" th:text="${movie.posterFilm}"></span></li>
-										<li>Test2: <span href="#" th:text="${movie.getPosterPathUrl()}"></span></li>
+										<!--<li>Collection: <span href="#" th:text="${movie.belongs_to_collection"></span></li>-->
+										<!--<li>Genres: <span href="#" th:text="${movie.genres}"></span></li>
+										<li>Moyenne de vote: <span href="#" th:text="${movie.vote_average}"></span></li>
+										<li>Langues: <span href="#" th:text="${movie.spoken_languages}"></span></li>
 									</ul>
 									<div class="movie-synopsis" th:text="${movie.overview}"></div>
 								</div>
 								<div class="btn-group">
-								 <a href="#" style="text-align:center">Ajouter à ma Watchlist</a>
+								 <a href="#" style="text-align:center;text-decoration:none">Ajouter à ma Watchlist</a>
 								</div>
 							</div>
-						</div>
-
+						</div>-->
 					</div>
 				</div>
 			</form>
