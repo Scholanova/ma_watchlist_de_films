@@ -56,8 +56,14 @@ public class MovieServiceImpl implements MovieService{
     }
 
     public Result searchMovies(String params) {
-        params = params.replaceAll(" ","%20");
-        System.out.println("PARAM " + params);
+        System.out.println("parma " + params);
+        if(params.isEmpty()){
+            //return new Result();
+            return null;
+        }
+        else{
+            params = params.replaceAll(" ","%20");
+        }
     	String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
         String json = getUrlContent(url);
         Result res = new Result();
