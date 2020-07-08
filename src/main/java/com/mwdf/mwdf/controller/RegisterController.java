@@ -22,7 +22,6 @@ public class RegisterController {
     @Autowired
     private UserRepository userRepository;
 
-
     @GetMapping("/inscription")
     public ModelAndView getRegistred() {
 
