@@ -7,6 +7,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.mwdf.mwdf.models.CustomList;
 import com.mwdf.mwdf.models.User;
@@ -200,5 +202,14 @@ public class MovieController {
 		}
 
 		return new ModelAndView("redirect:" + "connexion/connexion");
+	}
+	@GetMapping("/ids_to_movies")
+	public String getMoviesFromIds(@RequestParam("listId")List<Integer> ids, Model model){
+		List<Movie> movies = new ArrayList<Movie>();
+		for(Integer id : ids){
+			movies.add(movieService.getMovie(id));
+		}
+		model.addAttribute("movies",movies);
+		return "index";
 	}
 }
