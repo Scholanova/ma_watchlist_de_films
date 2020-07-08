@@ -2,6 +2,9 @@ package com.mwdf.mwdf.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import com.mwdf.mwdf.entity.Genre;
+import com.mwdf.mwdf.entity.GenreResult;
 import com.mwdf.mwdf.entity.Movie;
 import com.mwdf.mwdf.entity.Result;
 import org.springframework.beans.factory.annotation.Value;
@@ -66,8 +69,8 @@ public class MovieServiceImpl implements MovieService{
         }
     	String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
         String json = getUrlContent(url);
-        Result res = new Result();
-
+        Result res = resultMapper(json);
+        /*
         try {
             ObjectMapper mapper = new ObjectMapper();
             res = mapper.readValue(json, Result.class);
@@ -75,7 +78,7 @@ public class MovieServiceImpl implements MovieService{
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-
+        */
         List<Movie> updatedMovie = new ArrayList<Movie>();
         for(Movie movie : res.getResults()){
             movie = getMovie(movie.getId());
@@ -122,6 +125,18 @@ public class MovieServiceImpl implements MovieService{
 		}
 		return m;
 	}
+	public Result resultMapper(String json){
+        Result res = new Result();
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            res = mapper.readValue(json, Result.class);
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
 
     private void initMoviePosition(Result res){
         int i = 1;
@@ -129,5 +144,33 @@ public class MovieServiceImpl implements MovieService{
             m.setPosition(i);
             i++;
         }
+    }
+
+    public GenreResult getAllGenre(){
+        List<Genre> list = new ArrayList<Genre>();
+        String url = "https://api.themoviedb.org/3/genre/movie/list?api_key="+TOKEN+"&language="+LANG;
+        String json = getUrlContent(url);
+        GenreResult result = new GenreResult();
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            /*CollectionType javaType = mapper.getTypeFactory()
+                    .constructCollectionType(List.class, Genre.class);
+            list = mapper.readValue(json,  javaType);
+            */
+            result = mapper.readValue(json, GenreResult.class);
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public Movie getRandomMovieGenre(int idGenre){
+        int page = (int) (Math.random() * ( 500 - 1 ));
+        int randomId = (int) (Math.random() * ( 19 ));
+        String url = "https://api.themoviedb.org/3/discover/movie?api_key="+TOKEN+"&with_genres="+idGenre+"&page="+page+"&language="+LANG;
+        String json = getUrlContent(url);
+        Result result = resultMapper(json);
+        return result.getResults().get(randomId);
     }
 }
