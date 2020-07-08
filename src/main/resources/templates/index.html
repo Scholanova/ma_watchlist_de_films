@@ -10,54 +10,64 @@
 	<link rel="stylesheet" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">
 	<header th:replace="header/header::header">	</header>
 		<div class="welcome">
-			<h1>Bienvenue sur watcher !!!</h1>
+			<h1>Bienvenue sur watcher</h1>
 			<p>Cherchez un film et ajoutez-le dans votre watchlist</p>
 		</div>
 
 
-		<div class="search-container">
-		    <form class="example" th:action="@{/search}" th:object="${params}" method="get">
-				<input type="text" placeholder="Chercher un film.." name="params">
-				<button type="submit"><i class="fa fa-search"></i></button>
-				<div id="container-movies">
-					<div class="container-movie" th:each="movie: ${movies}">
-						<div class="movie">
-							<div class="movie-inside front">
-								<!-- <img th:src="${movie.getPosterPathUrl()}">movie poster_path -->
-							</div>
-							<div class="movie-inside back">
-								<div class="movie-details">
-									<div class="movie-snap"><!-- movie backdrop_path -->
-										<!-- <img th:src="${movie.getBackdropPathUrl()}"> -->
-									</div>
-									<h1 th:text="${movie.original_title}"><br><span th:text="${release_date}"></span></h1>
-									<ul>
-										<li>Titre d'origine: <span href="#" th:text="${movie.original_title}"></span></li>
-										<li>Popularité: <span href="#" th:text="${movie.popularity}"></span></li>
-										<!--<li>votes: <span href="#" th:text="${movie.vote_count}"></span></li>
-										<li>Moyenne de vote: <a href="#" th:text="${movie.vote_average}"></a></li>-->
-										<li>Langue: <span href="#" th:text="${movie.original_language}"></span></li>
-										<!-- <li>Test1: <span href="#" th:text="${movie.posterFilm}"></span></li> -->
-										<!-- <li>Test2: <span href="#" th:text="${movie.getPosterPathUrl()}"></span></li> -->
-										<li hidden name="${movie.original_title}"> </li>
-									</ul>
-									<div class="movie-synopsis" th:text="${movie.overview}"></div>
+	<div class="search-container">
+		<form class="example" th:action="@{/search}" th:object="${params}" method="get">
+			<div class="input-group">
+				<input type="text" class="form-control border-right-0" placeholder="Chercher un film.." name="params">
+				<span class="input-group-append border-left-0">
+			            <div class="input-group-text" type="submit">
+			                <i class="fa fa-search" style="border: none;"></i>
+			            </div>
+				</span>
+			</div>
+			<div id="container-movies">
+				<div class="container-movie" th:each="movie: ${movies}">
+					<div class="movie">
+						<div class="flip-card">
+							<div class="flip-card-inner">
+								<div class="flip-card-front">
+									<img th:src="${movie.getPosterPathUrl()}" alt="frontPoster"
+										 style="width:100%;height:100%;">
 								</div>
-									<div th:switch="${redirect}">
-										<button type="button" class="btn btn-primary" style="text-align:center" data-toggle="modal" th:data-val="${movie.id}" data-target="#Modal"  th:case="0" ><i class="fas fa-plus"></i> </button>
-										<button type="button" class="btn btn-primary" style="text-align:center" data-toggle="modal"  th:data-val="${movie.id}" data-target="#Modal" th:case="1" ><i class="fas fa-plus"></i> </button>
-										<button type="button" class="btn btn-primary" style="text-align:center" onclick="window.location.replace('/connexion')" th:case="2" ><i class="fas fa-plus"></i> </button>
-
+								<div class="flip-card-back">
+									<div class="movie-snap">
+										<img th:src="${movie.getBackdropPathUrl()}" alt="backPoster"
+											 style="width:100%;height:100%;">
 									</div>
-									<div>
-									</div>
+									<h1 th:text="${movie.title}"></h1>
+									<br>
+									<p><span th:text="${movie.release_date}"></span> <span
+											th:text="${movie.runtime}"></span></p>
+									<p>Titre d'origine: <span th:text="${movie.original_title}"></span></p>
+									<!--										<p>Collection: <span th:text="${movie?.belongs_to_collection?.name}"></span></p>-->
+									<!--										<p>Genres: <span th:text="${movie?.genres.get(0).name}"></span></p>-->
+									<p>Moyenne de vote: <span th:text="${movie?.vote_average}"></span></p>
+									<!--										<p>Langues: <span th:text="${movie?.spoken_languages.get(0)?.name}"></span></p>-->
+									<div class="movie-synopsis" th:text="${movie?.overview}"></div>
+								</div>
 							</div>
 						</div>
-
+						<div th:switch="${redirect}">
+							<button type="button" class="btn btn-primary" style="text-align:center" data-toggle="modal"
+									th:data-val="${movie.id}" data-target="#Modal" th:case="0"><i
+									class="fas fa-plus"></i></button>
+							<button type="button" class="btn btn-primary" style="text-align:center" data-toggle="modal"
+									th:data-val="${movie.id}" data-target="#Modal" th:case="1"><i
+									class="fas fa-plus"></i></button>
+							<button type="button" class="btn btn-primary" style="text-align:center"
+									onclick="window.location.replace('/connexion')" th:case="2"><i
+									class="fas fa-plus"></i></button>
+						</div>
 					</div>
 				</div>
-			</form>
-  		</div>
+			</div>
+		</form>
+	</div>
 
 	<!-- Modal -->
 	<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -100,30 +110,42 @@
 	<div id="container-recommandation">
 		<div class="container-movie">
 			<div class="movie">
-				<div class="movie-inside front">
-					<img th:src="${movie.getPosterPathUrl()}">
-				</div>
-				<div class="movie-inside back">
-					<div class="movie-details">
-						<div class="movie-snap">
-							<img th:src="${movie.getBackdropPathUrl()}">
+				<div class="flip-card">
+					<div class="flip-card-inner">
+						<div class="flip-card-front">
+							<img th:src="${movie.getPosterPathUrl()}" alt="frontPoster"
+								 style="width:100%;height: 100%;">
 						</div>
-						<h1 th:text="${movie.original_title}"><br><span th:text="${release_date}"></span></h1>
-						<ul>
-							<li>Titre d'origine: <span th:text="${movie.original_title}"></span></li>
-							<li>Popularité: <span th:text="${movie.popularity}"></span></li>
-							<!--<li>votes: <span href="#" th:text="${movie.vote_count}"></span></li>
-                            <li>Moyenne de vote: <a href="#" th:text="${movie.vote_average}"></a></li>-->
-							<li>Langue: <span th:text="${movie.original_language}"></span></li>
-						</ul>
-						<div class="movie-synopsis" th:text="${movie.overview}"></div>
+						<div class="flip-card-back">
+							<div class="movie-snap">
+								<img th:src="${movie.getBackdropPathUrl()}" alt="backPoster"
+									 style="width:100%;height:100%;">
+							</div>
+							<h1 th:text="${movie.title}"></h1>
+							<br>
+							<p><span th:text="${movie.release_date}"></span> <span
+									th:text="${movie.runtime}"></span></p>
+							<p>Titre d'origine: <span th:text="${movie.original_title}"></span></p>
+							<!--									<p>Collection: <span th:text="${movie?.belongs_to_collection?.name}"></span></p>-->
+							<!--									<p>Genres: <span th:text="${movie?.genres.get(0).name}"></span></p>-->
+							<p>Moyenne de vote: <span th:text="${movie.vote_average}"></span></p>
+							<!--								    <p>Langues: <span th:text="${movie?.spoken_languages.get(0)?.name}"></span></p>-->
+							<div class="movie-synopsis" th:text="${movie.overview}"></div>
+						</div>
 					</div>
-					<div class="btn-group">
-						<a href="#" style="text-align:center">Ajouter à ma Watchlist</a>
-					</div>
+				</div>
+				<div th:switch="${redirect}">
+					<button type="button" class="btn btn-primary" style="text-align:center" data-toggle="modal"
+							th:data-val="${movie.id}" data-target="#Modal" th:case="0"><i
+							class="fas fa-plus"></i> </button>
+					<button type="button" class="btn btn-primary" style="text-align:center" data-toggle="modal"
+							th:data-val="${movie.id}" data-target="#Modal" th:case="1"><i
+							class="fas fa-plus"></i> </button>
+					<button type="button" class="btn btn-primary" style="text-align:center"
+							onclick="window.location.replace('/connexion')" th:case="2"><i
+							class="fas fa-plus"></i> </button>
 				</div>
 			</div>
-
 		</div>
 	</div>
 	</span>

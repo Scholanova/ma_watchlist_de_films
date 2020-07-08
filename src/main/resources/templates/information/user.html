@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Page d'nformation</title>
+</head>
+<body>
 <header th:replace="header/header::header"></header>
+<div class="container">
+    <h2 class="welcome">Mon compte</h2>
+    <div class="center">
+        <p><b>Nom d'utilisateur :</b> <span th:text="${userInfos.username}" id="username-change"/></span></p>
+        <p><br>Nom :</b> <span th:text="${userInfos.lastname}" id="lastname-change"/></span></p>
+        <p><br>Prénom :</b> <span th:text="${userInfos.firstname}" id="firstname-change"/></span></p>
+    </div>
+    <!--<form th:action="@{/user}" method="post">
+        <fieldset>
+                <div>
+                    <label for="firstname-change">Prenom</label>
+                    <input type="text" th:value="${userInfos.firstname}" id="firstname-change" name="firstname" placeholder="Prenom" disabled/>
+                </div>
+                <div>
+                    <label for="lastname-change">Nom</label>
+                    <input type="text" th:value="${userInfos.lastname}" id="lastname-change" name="lastname" placeholder="Nom" disabled/>
+                </div>
+            <input id="change-valid-button" type="button" value="Modifier">
 
-<div>
-    <p>
-        <p th:text="${userInfos.username}" id="username-change"/></p>
-
-        <form th:action="@{/user}" method="post">
-            <fieldset>
-                    <div>
-                        <label for="firstname-change">Prenom</label>
-                        <input type="text" th:value="${userInfos.firstname}" id="firstname-change" name="firstname" placeholder="Prenom" disabled/>
-                    </div>
-                    <div>
-                        <label for="lastname-change">Nom</label>
-                        <input type="text" th:value="${userInfos.lastname}" id="lastname-change" name="lastname" placeholder="Nom" disabled/>
-                    </div>
-                <input id="change-valid-button" type="button" value="Modifier">
-
-            </fieldset>
-        </form>
+        </fieldset>
+    </form>-->
 </div>
-
-</div>
+</body>
     <script type="text/javascript" th:src="@{/js/modifyInformation.js}"></script>
 </html>
