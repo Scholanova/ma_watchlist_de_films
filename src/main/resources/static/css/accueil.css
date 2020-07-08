@@ -123,6 +123,15 @@ body{
 	margin-top: 2%;
 	margin-left: -25%;
 }
+#container-recommandation{
+	position: absolute;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
 .container-movie{
 	position: relative;
 	margin: 50px 40px;

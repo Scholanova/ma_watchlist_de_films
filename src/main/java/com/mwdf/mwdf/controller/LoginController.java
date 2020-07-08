@@ -14,21 +14,18 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 
-    private MovieService movieService;
 
-    public LoginController(MovieService movieService) {
+
+    public LoginController() {
         super();
-        this.movieService = movieService;
     }
 
     @GetMapping("/connexion")
-    public ModelAndView loginGet(Model model) {
+    public ModelAndView loginGet() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         //si connecté
         if (!(auth instanceof AnonymousAuthenticationToken)) {
-            Movie movie = movieService.getRandomMovie();
-            model.addAttribute("movie", movie);
             return new ModelAndView("redirect:/");
         }
         return new ModelAndView("connexion/connexion");

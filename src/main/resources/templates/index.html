@@ -72,6 +72,40 @@
 			</div>
 		</div>
 	</div>
+
+
+	<div class="welcome">
+		<h1>Recommandation</h1>
+	</div>
+	<div id="container-recommandation">
+		<div class="container-movie">
+			<div class="movie">
+				<div class="movie-inside front">
+					<img th:src="${movie.getPosterPathUrl()}">
+				</div>
+				<div class="movie-inside back">
+					<div class="movie-details">
+						<div class="movie-snap">
+							<img th:src="${movie.getBackdropPathUrl()}">
+						</div>
+						<h1 th:text="${movie.original_title}"><br><span th:text="${release_date}"></span></h1>
+						<ul>
+							<li>Titre d'origine: <span th:text="${movie.original_title}"></span></li>
+							<li>Popularité: <span th:text="${movie.popularity}"></span></li>
+							<!--<li>votes: <span href="#" th:text="${movie.vote_count}"></span></li>
+                            <li>Moyenne de vote: <a href="#" th:text="${movie.vote_average}"></a></li>-->
+							<li>Langue: <span th:text="${movie.original_language}"></span></li>
+						</ul>
+						<div class="movie-synopsis" th:text="${movie.overview}"></div>
+					</div>
+					<div class="btn-group">
+						<a href="#" style="text-align:center">Ajouter à ma Watchlist</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
 	</body>
 
 </html>
