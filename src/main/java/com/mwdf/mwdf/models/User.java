@@ -6,16 +6,15 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -110,5 +109,18 @@ public class User implements UserDetails {
         if (!password.isEmpty()) {
             this.password = BCryptManagerUtil.passwordencoder().encode(password);
         }
+    }
+
+    @OneToMany(mappedBy="user")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @Cascade(value = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Comment> comment = new ArrayList<>();
+
+    public List<Comment> getComment() {
+        return comment;
+    }
+
+    public void setComment(List<Comment> comment) {
+        this.comment = comment;
     }
 }

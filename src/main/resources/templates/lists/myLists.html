@@ -8,7 +8,7 @@
         <div class="container">
             <h2 class="welcome">Mes listes</h2>
             <div th:each="list, stats : ${lists}">
-                <div th:text="${list.title}"></div>
+                <a th:href="${'/list/'+list.title+'_'+list.idList}"><div th:text="${list.title}"></div></a>
                 <div th:text="${list.movies.size()} + ' film(s) ajouté(s) dans cette liste'"></div>
                 <form th:action="@{/delete_list}" method="post">
                     <input type="hidden" class="form-control" id="listId" name="listId" th:value="${list.idList}"/>

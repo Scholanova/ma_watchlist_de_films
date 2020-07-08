@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.mwdf.mwdf.models.CustomList;
 import com.mwdf.mwdf.models.User;
@@ -15,7 +15,6 @@ import com.mwdf.mwdf.repositories.MovieRepository;
 import com.mwdf.mwdf.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.PropertySource;
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,9 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.mwdf.mwdf.entity.APIMovieDBAuthToken;
 import com.mwdf.mwdf.entity.Movie;
 import com.mwdf.mwdf.entity.Result;
@@ -207,5 +204,25 @@ public class MovieController {
 		}
 
 		return new ModelAndView("redirect:" + "/mes_listes");
+	}
+
+	@GetMapping("/list/{listTitle}_{listId}")
+	public String getMoviesFromIds(@PathVariable("listId") long listId, @PathVariable("listTitle") String listTitle, Model model){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+
+			CustomList list = customListRepository.findByIdList(listId);
+			List<Movie> movies = new ArrayList<Movie>();
+
+			for (com.mwdf.mwdf.models.Movie movie : list.getMovies()) {
+				movies.add(movieService.getMovie(movie.getApiFilmId()));
+			}
+
+			model.addAttribute("movies", movies);
+			model.addAttribute("listTitle", listTitle);
+			return "lists/myList";
+		}
+
+		return "connexion/connexion";
 	}
 }
