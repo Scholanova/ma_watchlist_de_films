@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Mes listes</title>
+    <title>Mes watchlists</title>
 </head>
     <body>
     <header th:replace="header/header::header"></header>
         <div class="container">
-            <h2 class="welcome">Mes listes</h2>
-            <div th:each="list, stats : ${lists}">
+            <h2 class="welcome">Mes watchlists</h2>
+            <div th:each="list: ${lists}">
                 <div th:text="${list.title}"></div>
                 <div th:text="${list.movies.size()} + ' film(s) ajoutÃ©(s) dans cette liste'"></div>
                 <form th:action="@{/delete_list}" method="post">
@@ -16,7 +16,7 @@
                 </form>
             </div>
             <br>
-            <a sec:authorize="isAuthenticated()" th:href="@{/new_list}">Creer une nouvelle liste</a>
+            <button class="btn btn-default"><a sec:authorize="isAuthenticated()" th:href="@{/new_list}">Créer une nouvelle watchlist</a></button>
         </div>
     </body>
 </html>

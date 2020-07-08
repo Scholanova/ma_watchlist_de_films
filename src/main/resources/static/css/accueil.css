@@ -278,3 +278,9 @@ form.myform .btn-group:after {
 	background-color: #ddd;
 	padding: 2%;
 }
+
+.error
+{
+	text-align: center;
+	color: red;
+}
