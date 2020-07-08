@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mwdf.mwdf.entity.Genre;
 import com.mwdf.mwdf.models.CustomList;
 import com.mwdf.mwdf.models.User;
 import com.mwdf.mwdf.repositories.CustomListRepository;
@@ -226,5 +227,18 @@ public class MovieController {
 		}
 
 		return "connexion/connexion";
+	}
+
+	@GetMapping("/genres")
+	@ResponseBody
+	public String getGenres(){
+
+		return String.join(", ", movieService.getAllGenre().toString());
+	}
+	@GetMapping("/randomGenre")
+	@ResponseBody
+	public String getRandom(@RequestParam("idGenre") int idGenre){
+
+		return movieService.getRandomMovieGenre(idGenre).toString();
 	}
 }
