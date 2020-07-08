@@ -22,6 +22,7 @@ public class MainController {
 	@GetMapping("/")
 	public String accueilPage(Model model)
 	{
+		//test
 		Movie movie = movieService.getRandomMovie();
 		model.addAttribute("movie", movie);
 		return "index";
