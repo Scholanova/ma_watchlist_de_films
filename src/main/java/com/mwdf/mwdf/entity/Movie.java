@@ -19,10 +19,11 @@ public class Movie {
 	private String poster_path;
 	private String backdrop_path;
 	private String posterFilm;
+	private String poster2Film;
 	private int position;
 	private BelongsToCollection belongs_to_collection;
 	private List<Genre> genres;
-	private SpokenLanguages spoken_languages;
+	private List <SpokenLanguages> spoken_languages;
 	private String status;
 	private String tagline;
 	private String title;
@@ -148,11 +149,11 @@ public class Movie {
 		this.genres = genres;
 	}
 
-	public SpokenLanguages getSpoken_languages() {
+	public List <SpokenLanguages> getSpoken_languages() {
 		return spoken_languages;
 	}
 
-	public void setSpoken_languages(SpokenLanguages spoken_languages) {
+	public void setSpoken_languages(List <SpokenLanguages> spoken_languages) {
 		this.spoken_languages = spoken_languages;
 	}
 
@@ -240,15 +241,19 @@ public class Movie {
 				'}';
 	}
 
-	private void initPosterFilm(){
+	public void initPosterFilm(){
 		this.posterFilm = "https://image.tmdb.org/t/p/original" + this.getPoster_path();
 	}
 
-	private String getPosterPathUrl(){
+	public void initBackDropFilm(){
+		this.poster2Film = "https://image.tmdb.org/t/p/original" + this.getPoster_path();
+	}
+
+	public String getPosterPathUrl(){
 		return "https://image.tmdb.org/t/p/original" + this.getPoster_path();
 	}
 
-	private String getBackdropPathUrl(){
+	public String getBackdropPathUrl(){
 		return "https://image.tmdb.org/t/p/original" + this.getBackdrop_path();
 	}
 	
