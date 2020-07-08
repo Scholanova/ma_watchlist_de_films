@@ -70,6 +70,11 @@ public class CustomList {
         this.title = title;
     }
 
+    public CustomList(long id, String title) {
+        this.idList = id;
+        this.title = title;
+    }
+
     public CustomList(String title, Set<Movie> movies, Set<User> users) {
         this.title = title;
         this.movies = movies;
