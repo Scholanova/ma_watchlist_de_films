@@ -2,11 +2,11 @@ package com.mwdf.mwdf.models;
 
 import com.sun.istack.NotNull;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "movies")
@@ -58,5 +58,18 @@ public class Movie {
 
     public Movie(int apiFilmId) {
         this.apiFilmId = apiFilmId;
+    }
+
+    @OneToMany(mappedBy="movie")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @Cascade(value = {org.hibernate.annotations.CascadeType.PERSIST, org.hibernate.annotations.CascadeType.REMOVE})
+    private List<Comment> comment = new ArrayList<>();
+
+    public List<Comment> getComment() {
+        return comment;
+    }
+
+    public void setComment(List<Comment> comment) {
+        this.comment = comment;
     }
 }

@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +15,6 @@ import com.mwdf.mwdf.repositories.MovieRepository;
 import com.mwdf.mwdf.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.PropertySource;
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,9 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.mwdf.mwdf.entity.APIMovieDBAuthToken;
 import com.mwdf.mwdf.entity.Movie;
 import com.mwdf.mwdf.entity.Result;
@@ -89,8 +84,14 @@ public class MovieController {
 
 			User user = userRepository.findByUsername(currentUserName);
 			model.addAttribute("lists", user.getLists());
-		}
+			if ( user.getLists().size()== 0)
+				model.addAttribute("redirect",0);
+			else
+				model.addAttribute("redirect",1);
 
+		}
+		else
+			model.addAttribute("redirect",2);
 		return new ModelAndView("index");
 	}
 
@@ -190,6 +191,7 @@ public class MovieController {
 
 	@PostMapping("/movie_to_list")
 	public ModelAndView addMovieToAList(@RequestParam("listId") long listId, @RequestParam("apiFilmId") int apiFilmId) {
+		System.out.println("listId: "+listId+"/n apiFilmId: "+ apiFilmId);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 			String currentUserName = authentication.getName();
@@ -201,15 +203,26 @@ public class MovieController {
 			customListRepository.save(list);
 		}
 
-		return new ModelAndView("redirect:" + "connexion/connexion");
+		return new ModelAndView("redirect:" + "/mes_listes");
 	}
-	@GetMapping("/ids_to_movies")
-	public String getMoviesFromIds(@RequestParam("listId")List<Integer> ids, Model model){
-		List<Movie> movies = new ArrayList<Movie>();
-		for(Integer id : ids){
-			movies.add(movieService.getMovie(id));
+
+	@GetMapping("/list/{listTitle}_{listId}")
+	public String getMoviesFromIds(@PathVariable("listId") long listId, @PathVariable("listTitle") String listTitle, Model model){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+
+			CustomList list = customListRepository.findByIdList(listId);
+			List<Movie> movies = new ArrayList<Movie>();
+
+			for (com.mwdf.mwdf.models.Movie movie : list.getMovies()) {
+				movies.add(movieService.getMovie(movie.getApiFilmId()));
+			}
+
+			model.addAttribute("movies", movies);
+			model.addAttribute("listTitle", listTitle);
+			return "lists/myList";
 		}
-		model.addAttribute("movies",movies);
-		return "index";
+
+		return "connexion/connexion";
 	}
 }
