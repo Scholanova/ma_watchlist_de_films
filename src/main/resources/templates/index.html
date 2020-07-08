@@ -94,10 +94,10 @@
 		</div>
 	</div>
 
-          <div class="container">
-			<div class="welcome">
-				<h1>Recommendation</h1>
-			</div>
+	<span th:if="${movies == null}">
+	<div class="welcome">
+		<h1>Recommandation</h1>
+	</div>
 			<div id="container-movies">
 				<div class="container-movie">
 					<div class="movie">
@@ -113,12 +113,12 @@
 								    <h1 th:text="${movie.title}"></h1>
 								    <br>
 								    <p><span th:text="${movie.release_date}"></span> <span th:text="${movie.runtime}"></span></p> 
-								    <p>Titre d'origine: <span th:text="${movie.original_title}"></span></p>
 								    <p>Collection: <span th:text="${movie?.belongs_to_collection?.name}"></p>
+								    <p>Titre d'origine: <span th:text="${movie.original_title}"></span></p>
 								    <!--<p>Genres: <span th:text="${movie?.genre.get(0).name}"></span></p>-->
 								    <p>Moyenne de vote: <span th:text="${movie.vote_average}"></span></p>
-								    <p>Langues: <span th:text="${movie?.spoken_languages.get(0)?.name}"></span></p>
 								    <div class="movie-synopsis" th:text="${movie.overview}"></div>
+								    <p>Langues: <span th:text="${movie?.spoken_languages.get(0)?.name}"></span></p>
 							    </div>
 						  	</div>
 						</div>
@@ -129,6 +129,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	</span>
 	</body>
 </html>
-
