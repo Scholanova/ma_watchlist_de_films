@@ -6,7 +6,7 @@
     <body>
     <header th:replace="header/header::header"></header>
         <div class="container">
-            <h2 class="welcome">Mes listes</h2>
+            <h2 class="welcome">Mes watchlists</h2>
             <div th:each="list, stats : ${lists}">
                 <a th:href="${'/list/'+list.title+'_'+list.idList}"><div th:text="${list.title}"></div></a>
                 <div th:text="${list.movies.size()} + ' film(s) ajouté(s) dans cette liste'"></div>
@@ -16,7 +16,7 @@
                 </form>
             </div>
             <br>
-            <button class="btn btn-default"><a sec:authorize="isAuthenticated()" th:href="@{/new_list}">Cr�er une nouvelle watchlist</a></button>
+            <button class="btn btn-default"><a sec:authorize="isAuthenticated()" th:href="@{/new_list}">Créer une nouvelle watchlist</a></button>
         </div>
     </body>
 </html>
