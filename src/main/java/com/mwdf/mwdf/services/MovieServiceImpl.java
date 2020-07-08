@@ -66,6 +66,10 @@ public class MovieServiceImpl implements MovieService{
             e.printStackTrace();
         }
 
+        for(Movie movie : res.getResults()){
+            movie.initPosterFilm();
+            movie.initBackDropFilm();
+        }
         initMoviePosition(res);
         return res;
     }
