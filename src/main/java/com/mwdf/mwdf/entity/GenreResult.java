@@ -7,7 +7,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class GenreResult {
     List<Genre> genres;
-
+    //lol
     public GenreResult() {
     }
     public GenreResult(List<Genre> genres) {

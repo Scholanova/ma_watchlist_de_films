@@ -173,4 +173,15 @@ public class MovieServiceImpl implements MovieService{
         Result result = resultMapper(json);
         return result.getResults().get(randomId);
     }
+
+    @Override
+    public Movie getPopularMovie() {
+
+        int page = (int) (Math.random() * ( 500 - 1 ));
+        int randomId = (int) (Math.random() * ( 19 ));
+        String url = "https://api.themoviedb.org/3/movie/popular?api_key="+TOKEN+"&language="+LANG+"&page="+page;
+        String json = getUrlContent(url);
+        Result result = resultMapper(json);
+        return result.getResults().get(randomId);
+    }
 }
