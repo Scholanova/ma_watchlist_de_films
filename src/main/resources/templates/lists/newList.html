@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Créer une liste</title>
+    <title>Nouvelle watchlist</title>
 </head>
 <body>
 <header th:replace="header/header::header"></header>
     <div class="container">
-    	<h2 class="welcome">Creez votre liste !</h2>
-        <form th:action="@{/create_list}" method="post">
+    	<h2 class="welcome">Créez votre watchlist  !</h2>
+        <form th:action="@{/create_list}" method="post" style="width: 50%;margin: auto;">
             <fieldset>
 
                 <div class="form-group">
-                    <label for="listTitle">Nom de la liste</label>
-                    <input type="text" class="form-control" id="listTitle" name="listTitle" placeholder="Nom de liste" required="required" autofocus="autofocus" />
+                    <label for="listTitle">Nom de la watchlist</label>
+                    <input type="text" class="form-control" id="listTitle" name="listTitle" placeholder="Nom de la liste" required="required" autofocus="autofocus" />
                 </div>
 
 				<button type="submit" class="btn btn-default">Créer</button>
