@@ -2,6 +2,7 @@ package com.mwdf.mwdf.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -256,5 +257,24 @@ public class Movie {
 	public String getBackdropPathUrl(){
 		return "https://image.tmdb.org/t/p/original" + this.getBackdrop_path();
 	}
-	
+
+	public void initGenreIfNull(){
+		if(this.genres == null || this.genres.size() ==0){
+			this.genres = new ArrayList<Genre>();
+			this.genres.add(new Genre(-1, "No Genre"));
+		}
+	}
+
+	public void initBelongs_To_CollentionIfNull(){
+		if(this.belongs_to_collection == null){
+			this.belongs_to_collection = new BelongsToCollection(-1, "No Collection", "", "");
+		}
+	}
+
+	public void initSpoken_languagesIfNull(){
+		if(this.spoken_languages == null || this.spoken_languages.size()==0){
+			this.spoken_languages = new ArrayList<SpokenLanguages>();
+			this.spoken_languages.add(new SpokenLanguages("-1", "No Spoken Language"));
+		}
+	}
 }
