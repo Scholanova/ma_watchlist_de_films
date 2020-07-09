@@ -48,6 +48,13 @@ body
 	color : #b90707;
 	font-family: initial;
 }
+
+.recommandation
+{
+	text-align:center;
+	color:black;
+	font-family: initial;
+}
 .welcome h1
 {
     font-family: 'Montserrat', sans-serif;
