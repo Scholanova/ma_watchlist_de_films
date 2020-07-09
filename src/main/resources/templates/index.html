@@ -75,7 +75,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter à ma liste</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -88,13 +88,12 @@
                     <form th:action="@{/movie_to_list}" method="post">
                         <tr th:each="list: ${lists}">
                             <th>
-                                <button type="submit" class="btn btn-secondary" th:text="${list.title}"></button>
-                                <input type="hidden" th:value="${list.getIdList()}" id="listId" name="listId"></input>
-                                <input type="hidden" id="apiFilmId" name="apiFilmId"></input>
-
+                                <button type="submit" class="btn btn-secondary" th:id="${'list'+list.getIdList()}" th:text="${list.title}" ></button>
+                                 <input type="hidden" id="idList" name="idList">
                             <th/>
 
                         </tr>
+                        <input type="hidden" id="apiFilmId" name="apiFilmId"></input>
                     </form>
                 </div>
             </div>

@@ -5,8 +5,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import java.util.*;
 import java.util.stream.Collectors;
+
 
 import com.mwdf.mwdf.entity.Genre;
 import com.mwdf.mwdf.models.Comment;
@@ -200,21 +206,23 @@ public class MovieController {
 	}
 
 	@PostMapping("/movie_to_list")
-	public ModelAndView addMovieToAList(@RequestParam("listId") long listId, @RequestParam("apiFilmId") int apiFilmId) {
-		System.out.println("listId: "+listId+"/n apiFilmId: "+ apiFilmId);
+	public ModelAndView addMovieToAList( @RequestParam Map<String, String> queryMap,@RequestParam("apiFilmId") int apiFilmId) {
+		String listId = "";
+		for (Map.Entry<String, String> entry : queryMap.entrySet()) {
+			String k = entry.getKey();
+			if (k.equals("idList")) {
+				listId = entry.getValue().substring(4);
+			}
+		}
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 			String currentUserName = authentication.getName();
-
 			com.mwdf.mwdf.models.Movie movie = new com.mwdf.mwdf.models.Movie(apiFilmId);
-			CustomList list = customListRepository.findByIdList(listId);
+			CustomList list = customListRepository.findByIdList( Long.parseLong(listId));
 			list.getMovies().add(movie);
-
 			customListRepository.save(list);
-
-			return new ModelAndView("redirect:" + "/mes_listes");
+			return new ModelAndView("redirect:" + "/index");
 		}
-
 		return new ModelAndView("redirect:" + "/connexion");
 	}
 

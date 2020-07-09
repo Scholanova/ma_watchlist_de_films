@@ -3,4 +3,14 @@ $(document).ready(function() {
         var myVal = $(event.relatedTarget).data('val');
         $(this).find("#apiFilmId").val(myVal);
     });
+
+
+    $('button[id^="list"]').click(function(){
+       console.log($(this).attr('id'));
+       $('#idList').val($(this).attr('id'));
+    });
 });
+
+
+
+
