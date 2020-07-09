@@ -45,11 +45,12 @@ body
 .welcome
 {
 	text-align:center;
-	color: #0b7dda;
+	color : #b90707;
 	font-family: initial;
 }
 .welcome h1
 {
+    font-family: 'Montserrat', sans-serif;
 	font-size: 45px;
 }
 
@@ -72,6 +73,10 @@ form.example input[type=text] {
   width: 80%;
   background: #f1f1f1;
   border-right: none;
+}
+
+#btn-search {
+    background-color: #b90707;
 }
 
 form.example button {
@@ -180,7 +185,7 @@ form.example::after {
 }
 
 .flip-card-back {
-  background-color: #2980b9;
+  background-color: #333333;
   color: white;
   transform: rotateY(180deg);
 }
