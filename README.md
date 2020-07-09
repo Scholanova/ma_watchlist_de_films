@@ -10,10 +10,11 @@ Application Watcher permet de créer une Playist de film à regarder
   - Paul Pauwels
   - Cyril VUILLEMIN
   
-**lien vers le site** 
+## Liens 
+#### Scalingo : 
 https://watcher.osc-fr1.scalingo.io/  
   
-### Initialisation du projet
+## Initialisation du projet
 
 Tout d'abord il configurer la base de données local.
 Creer le fichier **application.properties** en copiant le fichier **application-local.properties**
@@ -28,10 +29,10 @@ Run le projet
 $ mvn spring-boot:run
 ```
 
-### Architecture
+## Architecture
 Basé sur le pattern Modèle - Vue - Contrôleur
 
-**Back**
+#### Back
 
 Java Spring Boot
 
@@ -41,37 +42,30 @@ Jpa : Traitement de la base de données
 
 Liquibase : Pour les migrations
 
-**Front**
-
+#### Front
 CSS, Bootstrap, Jquery, Javascript
 
-### Convention
-**Nommage des variables**
-
+## Convention
+#### Nommage des variables
 camelCase exemple : compteurDeGirafe
 
-**Donner un nom explicite**
-
+#### Donner un nom explicite
 compteurDeGirafe => compte des girafes
 
-**Nommage des constantes**
-
+#### Nommage des constantes
 Tout en majuscule
 Séparer les mots par underscore '_'
 Donner des noms simples et descriptifs
 
-**Nommage fichier**
-
+#### Nommage fichier
 Les noms des classes doivent respecter les conventions suivantes 
 1ère lettre en majuscule + camelCase
 Donner des noms simples et descriptifs
 
-**Nommage des commits GIT**
-
+#### Nommage des commits GIT
 Dire ce que fait le commit clairement.
 
-**Nommage des branches**
-
+#### Nommage des branches
 Chaque branche correspond à une issue.
 Chaque issue possède un numéro
 Chaque branche se nomme : mwdf-issue/etape-numero_issue
