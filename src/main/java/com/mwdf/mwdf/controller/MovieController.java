@@ -235,10 +235,12 @@ public class MovieController {
 			List<Movie> movies = new ArrayList<Movie>();
 
 			for (com.mwdf.mwdf.models.Movie movie : list.getMovies()) {
-				Movie apiMovie = movieService.getMovie(movie.getApiFilmId());
-				apiMovie.setComments(movie.getComment());
-				apiMovie.setAlreadySeen(movie.isAlreadySeen());
-				movies.add(apiMovie);
+				if (!movie.isAlreadySeen()) {
+					Movie apiMovie = movieService.getMovie(movie.getApiFilmId());
+					apiMovie.setComments(movie.getComment());
+					apiMovie.setAlreadySeen(movie.isAlreadySeen());
+					movies.add(apiMovie);
+				}
 			}
 
 			model.addAttribute("movies", movies);
