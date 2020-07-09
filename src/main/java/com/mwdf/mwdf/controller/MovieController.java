@@ -272,7 +272,7 @@ public class MovieController {
 			return new ModelAndView("redirect:" + "/list/" + list.getTitle() + "_" + listId);
 		}
 
-		return new ModelAndView("connexion");
+		return new ModelAndView("connexion/connexion");
 	}
 
 	@PostMapping("/add_comment")
@@ -295,6 +295,30 @@ public class MovieController {
 			return new ModelAndView("redirect:" + "/list/" + list.getTitle() + "_" + listId);
 		}
 
-		return new ModelAndView("connexion");
+		return new ModelAndView("connexion/connexion");
+	}
+
+	@GetMapping("/delete_comment")
+	public ModelAndView DeleteComment(@RequestParam long commentId, @RequestParam long listId, @RequestParam int idMovie){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			String userName = authentication.getName();
+			User currentUser = userRepository.findByUsername(userName);
+			CustomList list = customListRepository.findByIdList(listId);
+			List<com.mwdf.mwdf.models.Movie> movies = movieRepository.findByApiFilmIdAndLists(idMovie, list);
+
+			for (com.mwdf.mwdf.models.Movie movie: movies) {
+				List<Comment> comments = commentRepository.findByUserAndMovie(currentUser, movie);
+				comments.removeIf(m -> m.getIdComment().equals(commentId));
+				movie.setComment(comments);
+				currentUser.setComment(comments);
+			}
+			commentRepository.deleteById(commentId);
+
+
+			return new ModelAndView("redirect:" + "/list/" + list.getTitle() + "_" + listId);
+		}
+
+		return new ModelAndView("connexion/connexion");
 	}
 }
