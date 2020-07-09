@@ -8,14 +8,13 @@
 		<script type="application/javascript" src="../js/jquery.min.js" th:scr="@{/js/jquery.min.js}"></script>
 		<script type="application/javascript" src="../../static/js/movie.js" th:src="@{/js/movie.js}"></script>
 		<link rel="stylesheet" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">
-	
 		<header th:replace="header/header::header"></header>
-		
 		<div class="welcome">
 		    <h1>Bienvenue sur watcher</h1>
-		    <p>Cherchez un film et ajoutez-le à votre watchlist</p>
+		    <p>Cherchez un film et ajoutez-le dans votre watchlist</p>
 		</div>
-	
+		
+		
 		<div class="search-container">
 		    <form class="example" th:action="@{/search}" th:object="${params}" method="get">
 		        <div class="input-group">
@@ -33,22 +32,22 @@
 		                    <div class="flip-card">
 		                        <div class="flip-card-inner">
 		                            <div class="flip-card-front">
-		                                <img th:src="${movie.getPosterPathUrl()}" alt="frontPoster"
-		                                     style="width:100%;height:100%;">
+		                                <h1 th:if="${movie?.getPosterPathUrl() == null}"> <span th:text="${movie.title}"></span></h1>
+		                                <img th:if="${movie?.getPosterPathUrl() != null}" th:src="${movie?.getPosterPathUrl()}" alt="frontPoster" style="width:100%;height:100%;">
 		                            </div>
 		                            <div class="flip-card-back">
 		                                <div class="movie-snap">
-		                                    <img th:src="${movie.getBackdropPathUrl()}" alt="backPoster"
-		                                         style="width:100%;height:100%;">
+		                                    <!--<img th:if="${movie?.getBackdropPathUrl() == null}" style="width:100%;height:100%;">-->
+		                                    <img th:if="${movie?.getBackdropPathUrl() != null}" th:src="${movie?.getBackdropPathUrl()}" alt="unless" style="width:100%;height:100%;">
 		                                </div>
 		                                <h1 th:text="${movie.title}"></h1>
 		                                <br>
-		                                <p><span th:text="${movie.release_date}"></span> <span
-		                                        th:text="${movie.runtime}"></span></p>
+		                                <p>Date de Sortie: <span th:text="${movie.release_date}"></span></p>
+		                                <p>Durée: <span th:text="${movie.runtime + ' minutes'}"></span></p>
 		                                <p>Titre d'origine: <span th:text="${movie.original_title}"></span></p>
 		                                <!--										<p>Collection: <span th:text="${movie?.belongs_to_collection?.name}"></span></p>-->
 		                                <!--										<p>Genres: <span th:text="${movie?.genres.get(0).name}"></span></p>-->
-		                                <p>Moyenne de vote: <span th:text="${movie?.vote_average}"></span></p>
+		                                <p>Note: <span th:text="${movie?.vote_average+' /10'}"></span></p>
 		                                <!--										<p>Langues: <span th:text="${movie?.spoken_languages.get(0)?.name}"></span></p>-->
 		                                <div class="movie-synopsis" th:text="${movie?.overview}"></div>
 		                            </div>
@@ -70,13 +69,13 @@
 		        </div>
 		    </form>
 		</div>
-	
+		
 		<!-- Modal -->
 		<div class="modal" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		    <div class="modal-dialog" role="document">
 		        <div class="modal-content">
 		            <div class="modal-header">
-		                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+		                <h5 class="modal-title" id="exampleModalLabel">Ajouter à ma liste</h5>
 		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		                    <span aria-hidden="true">&times;</span>
 		                </button>
@@ -89,13 +88,12 @@
 		                    <form th:action="@{/movie_to_list}" method="post">
 		                        <tr th:each="list: ${lists}">
 		                            <th>
-		                                <button type="submit" class="btn btn-secondary" th:text="${list.title}"></button>
-		                                <input type="hidden" th:value="${list.getIdList()}" id="listId" name="listId"></input>
-		                                <input type="hidden" id="apiFilmId" name="apiFilmId"></input>
-		
+		                                <button type="submit" class="btn btn-secondary" th:id="${'list'+list.getIdList()}" th:text="${list.title}" ></button>
+		                                 <input type="hidden" id="idList" name="idList">
 		                            <th/>
 		
 		                        </tr>
+		                        <input type="hidden" id="apiFilmId" name="apiFilmId"></input>
 		                    </form>
 		                </div>
 		            </div>
@@ -105,7 +103,7 @@
 		        </div>
 		    </div>
 		</div>
-	
+			
 		<span th:if="${movies != null}">
 			<span th:if="${movies.empty}">
 				<p>Aucun film trouvÃ© !</p>
@@ -130,21 +128,21 @@
 			                                 style="width:100%;height: 100%;">
 									</div>
 									<div class="flip-card-back">
-										<div class="movie-snap">
-											<img th:src="${movie.getBackdropPathUrl()}" alt="backPoster"
-			                                     style="width:100%;height:100%;">
-										</div>
-										<h1 th:text="${movie.title}"></h1>
-										<br>
-										<p>Date de Sortie: <span th:text="${movie.release_date}"></span></p>
-			                            <p>DurÃ©e: <span th:text="${movie.runtime}"></span></p>
-										<p>Titre d'origine: <span th:text="${movie.original_title}"></span></p>
-			                            <!--<p>Collection: <span th:text="${movie?.belongs_to_collection?.name}"></span></p>-->
-			                            <!--<p>Genres: <span th:text="${movie?.genres?.get(0)?.name}"></span></p>-->
-										<p>Moyenne de vote: <span th:text="${movie.vote_average}"></span></p>
-			                            <!--<p>Langues: <span th:text="${movie?.spoken_languages?.get(0)?.name}"></span></p>-->
-										<div class="movie-synopsis" th:text="${movie.overview}"></div>
-									</div>
+		                                <div class="movie-snap">
+		                                    <!--<img th:if="${movie?.getBackdropPathUrl() == null}" style="width:100%;height:100%;">-->
+		                                    <img th:if="${movie?.getBackdropPathUrl() != null}" th:src="${movie?.getBackdropPathUrl()}" alt="unless" style="width:100%;height:100%;">
+		                                </div>
+		                                <h1 th:text="${movie.title}"></h1>
+		                                <br>
+		                                <p>Date de Sortie: <span th:text="${movie.release_date}"></span></p>
+		                                <p>Durée: <span th:text="${movie.runtime + ' minutes'}"></span></p>
+		                                <p>Titre d'origine: <span th:text="${movie.original_title}"></span></p>
+		                                <!--<p>Collection: <span th:text="${movie?.belongs_to_collection?.name}"></span></p>-->
+		                                <!--<p>Genres: <span th:text="${movie?.genres.get(0).name}"></span></p>-->
+		                                <p>Note: <span th:text="${movie?.vote_average+' /10'}"></span></p>
+		                                <!--<p>Langues: <span th:text="${movie?.spoken_languages.get(0)?.name}"></span></p>-->
+		                                <div class="movie-synopsis" th:text="${movie?.overview}"></div>
+	                            	</div>
 								</div>
 							</div>
 							<div th:switch="${redirect}">
