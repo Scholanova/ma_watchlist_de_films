@@ -329,3 +329,9 @@ form .btn-default:hover,.center .btn-default:hover {
   background-color: #666;
   color: white;
 }
+
+.tooltip{
+position: relative;
+display: inline-block;
+opacity: 1;
+}

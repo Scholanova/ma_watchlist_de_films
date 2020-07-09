@@ -19,7 +19,7 @@
 			  	<div th:text="${list.movies.size()} + ' film(s) ajouté(s) dans cette liste'"></div>
                 <form th:action="@{/delete_list}" method="post">
                     <input type="hidden" class="form-control" id="listId" name="listId" th:value="${list.idList}"/>
-                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-trash" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Supprimer cette watchlist"></span></button>
                 </form>
                  <br>
               </li>
