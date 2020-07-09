@@ -48,6 +48,13 @@ body
 	color : #b90707;
 	font-family: initial;
 }
+
+.recommandation
+{
+	text-align:center;
+	color:black;
+	font-family: initial;
+}
 .welcome h1
 {
     font-family: 'Montserrat', sans-serif;
@@ -135,6 +142,17 @@ form.example::after {
 	margin-top: 2%;
 	margin-left: -25%;
 }
+
+#container-movies-watchlist {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+}
 #container-recommandation{
 	position: absolute;
 	width: 100%;
@@ -194,7 +212,6 @@ form.example::after {
 {
 margin-left: 23%;
 }
-
 
 #input-search{
     margin: 0;
