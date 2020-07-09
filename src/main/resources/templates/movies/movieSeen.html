@@ -18,7 +18,7 @@
 </span>
 
 <span th:unless="${movies.isEmpty()}">
-<div id="container-movies">
+<div id="container-movies-watchlist">
     <div class="container-movie" th:each="movie: ${movies}">
         <div class="movie">
             <div class="flip-card">
@@ -51,19 +51,21 @@
                         <input type="text" placeholder="Ajouter un commentaire sur ce film ici" name="commentContent"
                                id="commentContent">
                         <input type="submit" style="text-align:center" value="Commenter">
+                        <form th:action="@{/remove_already_seen}" method="post">
+                            <input type="hidden" th:value="${movie.id}" name="idMovie">
+                            <button type="submit"
+                                    class="btn btn-default"><span
+                                    class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                     </form>
-                    <form th:action="@{/remove_already_seen}" method="post">
-                        <input type="hidden" th:value="${movie.id}" name="idMovie">
-                        <button type="submit"
-                                class="btn btn-default"><span
-                                class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                     </form>
+
                 </div>
             </div>
         <div>
             <div th:each="comment: ${movie.comments}">
                 <p th:text="${comment.content}"></p>
-                <a th:href="${'/delete_comment_already_seen_movie?commentId='+comment.idComment+'&idMovie='+movie.id}"><button type="submit" class="btn btn-default"><span
+                <a th:href="${'/delete_comment_already_seen_movie?commentId='+comment.idComment+'&idMovie='+movie.id}"><button
+                        type="submit" class="btn btn-default"><span
                         class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></a>
             </div>
         </div>
