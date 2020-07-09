@@ -329,4 +329,62 @@ public class MovieController {
 
 		return new ModelAndView("connexion/connexion");
 	}
+
+
+	@GetMapping("/add_movie_to_seen")
+	public ModelAndView MovieToSeen(@RequestParam long listId, @RequestParam int idMovie){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			String userName = authentication.getName();
+			User currentUser = userRepository.findByUsername(userName);
+			CustomList list = customListRepository.findByIdList(listId);
+
+			List<CustomList> customLists = customListRepository.findByUsers(currentUser);
+
+			for (CustomList customList : customLists) {
+				for (com.mwdf.mwdf.models.Movie movie : customList.getMovies()) {
+					if (movie.getApiFilmId() == idMovie) {
+						movie.setAlreadySeen(true);
+						movieRepository.save(movie);
+					}
+				}
+			}
+
+			return new ModelAndView("redirect:" + "/list/" + list.getTitle() + "_" + listId);
+		}
+
+		return new ModelAndView("connexion/connexion");
+	}
+
+	@GetMapping("/mes_films_vus")
+	public ModelAndView GetSeenMovies(Model model){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			String userName = authentication.getName();
+			User currentUser = userRepository.findByUsername(userName);
+
+			List<CustomList> customLists = customListRepository.findByUsers(currentUser);
+
+			List<com.mwdf.mwdf.models.Movie> moviesSeen = new ArrayList<>();
+			for (CustomList customList : customLists) {
+				for (com.mwdf.mwdf.models.Movie movie : customList.getMovies()) {
+					if (movie.isAlreadySeen()) {
+						moviesSeen.add(movie);
+					}
+				}
+			}
+
+			List<Movie> apiMoviesSeen = new ArrayList<>();
+			for (com.mwdf.mwdf.models.Movie movie : moviesSeen) {
+				Movie apiMovie = movieService.getMovie(movie.getApiFilmId());
+				apiMovie.setComments(movie.getComment());
+				apiMoviesSeen.add(apiMovie);
+			}
+
+			model.addAttribute("movies", apiMoviesSeen);
+			return new ModelAndView("movies/movieSeen");
+		}
+
+		return new ModelAndView("connexion/connexion");
+	}
 }
