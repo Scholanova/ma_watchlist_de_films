@@ -8,13 +8,14 @@
 		<script type="application/javascript" src="../js/jquery.min.js" th:scr="@{/js/jquery.min.js}"></script>
 		<script type="application/javascript" src="../../static/js/movie.js" th:src="@{/js/movie.js}"></script>
 		<link rel="stylesheet" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">
+	
 		<header th:replace="header/header::header"></header>
+		
 		<div class="welcome">
 		    <h1>Bienvenue sur watcher</h1>
-		    <p>Cherchez un film et ajoutez-le dans votre watchlist</p>
+		    <p>Cherchez un film et ajoutez-le ‡ votre watchlist</p>
 		</div>
-		
-		
+	
 		<div class="search-container">
 		    <form class="example" th:action="@{/search}" th:object="${params}" method="get">
 		        <div class="input-group">
@@ -45,10 +46,11 @@
 		                                <p>Date de Sortie: <span th:text="${movie.release_date}"></span></p>
 		                                <p>Dur√©e: <span th:text="${movie.runtime + ' minutes'}"></span></p>
 		                                <p>Titre d'origine: <span th:text="${movie.original_title}"></span></p>
-		                                <!--										<p>Collection: <span th:text="${movie?.belongs_to_collection?.name}"></span></p>-->
-		                                <!--										<p>Genres: <span th:text="${movie?.genres.get(0).name}"></span></p>-->
+		                                <!--<p>Collection: <span th:text="${movie?.belongs_to_collection?.name}"></span></p>-->
+		                                <!--<p>Genres: <span th:text="${movie?.genres.get(0).name}"></span></p>-->
 		                                <p>Note: <span th:text="${movie?.vote_average+' /10'}"></span></p>
-		                                <!--										<p>Langues: <span th:text="${movie?.spoken_languages.get(0)?.name}"></span></p>-->
+
+		                                <!--<p>Langues: <span th:text="${movie?.spoken_languages.get(0)?.name}"></span></p>-->
 		                                <div class="movie-synopsis" th:text="${movie?.overview}"></div>
 		                            </div>
 		                        </div>
@@ -69,13 +71,15 @@
 		        </div>
 		    </form>
 		</div>
-		
+
 		<!-- Modal -->
 		<div class="modal" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		    <div class="modal-dialog" role="document">
 		        <div class="modal-content">
 		            <div class="modal-header">
 		                <h5 class="modal-title" id="exampleModalLabel">Ajouter √† ma liste</h5>
+		                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+
 		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		                    <span aria-hidden="true">&times;</span>
 		                </button>
@@ -88,12 +92,22 @@
 		                    <form th:action="@{/movie_to_list}" method="post">
 		                        <tr th:each="list: ${lists}">
 		                            <th>
+
 		                                <button type="submit" class="btn btn-secondary" th:id="${'list'+list.getIdList()}" th:text="${list.title}" ></button>
 		                                 <input type="hidden" id="idList" name="idList">
 		                            <th/>
 		
 		                        </tr>
 		                        <input type="hidden" id="apiFilmId" name="apiFilmId"></input>
+
+		                                <button type="submit" class="btn btn-secondary" th:text="${list.title}"></button>
+		                                <input type="hidden" th:value="${list.getIdList()}" id="listId" name="listId"></input>
+		                                <input type="hidden" id="apiFilmId" name="apiFilmId"></input>
+		
+		                            <th/>
+		
+		                        </tr>
+
 		                    </form>
 		                </div>
 		            </div>
@@ -103,9 +117,9 @@
 		        </div>
 		    </div>
 		</div>
-			
+	
 		<span th:if="${movies != null}">
-			<span th:if="${movies.empty}">
+			<span th:if="${movies.empty}" class="error">
 				<p>Aucun film trouv√© !</p>
 			</span>
 		</span>
@@ -145,18 +159,24 @@
 	                            	</div>
 								</div>
 							</div>
+							
 							<div th:switch="${redirect}">
-								<button type="button" class="btn btn-primary" style="text-align:center" data-toggle="modal"
-			                            th:data-val="${movie.id}" data-target="#Modal" th:case="0" data-placement="right" title="Ajouter √† ma watchlist"><i
+								<button type="button" class="btn btn-primary" style="text-align:center" data-toggle="modal tooltip"
+			                            th:data-val="${movie.id}" data-target="#Modal" th:case="0" data-placement="right" title="Ajouter ‡ ma watchlist"><i
 			                            class="fas fa-plus"></i>
 			                    </button>
-								<button type="button" class="btn btn-primary" style="text-align:center" data-toggle="modal"
-			                            th:data-val="${movie.id}" data-target="#Modal" th:case="1" data-placement="right" title="Ajouter √† ma watchlist"><i
+								<button type="button" class="btn btn-primary" style="text-align:center" data-toggle="modal tooltip"
+			                            th:data-val="${movie.id}" data-target="#Modal" th:case="1" data-placement="right" title="Ajouter ‡ ma watchlist"><i
+
 			                            class="fas fa-plus"></i>
 			                    </button>
 								<button type="button" class="btn btn-primary" style="text-align:center"
 			                            onclick="window.location.replace('/connexion')" th:case="2"><i
+
 			                            class="fas fa-plus" data-placement="right" title="Ajouter √† ma watchlist"></i>
+
+			                            class="fas fa-plus" data-toggle="tooltip" data-placement="right" title="Ajouter ‡ ma watchlist"></i>
+
 			                    </button>
 							</div>
 						</div>
