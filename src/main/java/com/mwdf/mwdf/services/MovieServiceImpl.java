@@ -59,7 +59,7 @@ public class MovieServiceImpl implements MovieService{
     }
 
     public Result searchMovies(String params) {
-        System.out.println("parma " + params);
+        //System.out.println("parma " + params);
         if(params.isEmpty()){
             //return new Result();
             return null;
@@ -107,8 +107,8 @@ public class MovieServiceImpl implements MovieService{
             }
 
             if(!tmp.getOverview().isEmpty()){
-                System.out.println("is Etmpty ? :" + tmp.getOverview().isEmpty());
-                System.out.println("Resumé :" + tmp.getOverview());
+                //System.out.println("is Etmpty ? :" + tmp.getOverview().isEmpty());
+                //System.out.println("Resumé :" + tmp.getOverview());
                 movie.setOverview(tmp.getOverview());
             }
 
