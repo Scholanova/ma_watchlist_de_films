@@ -63,6 +63,10 @@ public class CustomListController {
             Set<CustomList> sortedList = lists.stream()
                     .sorted(Comparator.comparing(CustomList::getTitle)).collect(Collectors.toCollection(LinkedHashSet::new));
 
+            for (CustomList list : sortedList) {
+                list.getMovies().removeIf(m -> m.isAlreadySeen());
+            }
+
             model.addAttribute("lists", sortedList);
 
             return new ModelAndView("lists/myLists");
