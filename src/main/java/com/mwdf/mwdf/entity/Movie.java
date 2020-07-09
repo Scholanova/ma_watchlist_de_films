@@ -277,15 +277,26 @@ public class Movie {
 	}
 
 	public void initBackDropFilm(){
-		this.poster2Film = "https://image.tmdb.org/t/p/original" + this.getPoster_path();
+		this.poster2Film = "https://image.tmdb.org/t/p/original" + this.getBackdrop_path();
 	}
 
 	public String getPosterPathUrl(){
-		return "https://image.tmdb.org/t/p/original" + this.getPoster_path();
+		if(this.getPoster_path() == null){
+			//return "https://upload.wikimedia.org/wikipedia/commons/e/e6/Pas_d%27image_disponible.svg";
+			return null;
+		}
+		else{
+			return "https://image.tmdb.org/t/p/original" + this.getPoster_path();
+		}
 	}
 
 	public String getBackdropPathUrl(){
-		return "https://image.tmdb.org/t/p/original" + this.getBackdrop_path();
+		if(this.getBackdrop_path() == null){
+			return null;
+		}
+		else{
+			return "https://image.tmdb.org/t/p/original" + this.getBackdrop_path();
+		}
 	}
 
 	public void initGenreIfNull(){
