@@ -34,7 +34,7 @@ $ mvn spring-boot:run
 ```
 
 ## Architecture
-Basé sur le pattern Modèle - Vue - Contrôleur
+Basé sur le pattern Modèle - Vue - Contrôleur car c'est celui que nous connaissons le mieux et qui nous permet de gagner du temps.
 
 #### Back
 
