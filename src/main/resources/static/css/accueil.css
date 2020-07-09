@@ -195,6 +195,11 @@ form.example::after {
 margin-left: 23%;
 }
 
+
+#input-search{
+    margin: 0;
+}
+
 /* MOVIE DETAILS */
 .movie-details{
 	position: relative;
