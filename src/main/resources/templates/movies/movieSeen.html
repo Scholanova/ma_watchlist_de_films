@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <title>Mes films déjà vus</title>
+</head>
+<body>
+<script type="application/javascript" src="../js/jquery.min.js" th:scr="@{/js/jquery.min.js}"></script>
+<link rel="stylesheet" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">
+<header th:replace="header/header::header"></header>
+<div class="welcome">
+    <h1>Mes films déjà vus</h1>
+</div>
+<span th:if="${movies.isEmpty()}">
+<div class="welcome">
+    <h2 style="text-align:center">Votre liste est vide.<br></h2>
+</div>
+</span>
+
+<span th:unless="${movies.isEmpty()}">
+<div id="container-movies">
+    <div class="container-movie" th:each="movie: ${movies}">
+        <div class="movie">
+            <div class="flip-card">
+							<div class="flip-card-inner">
+								<div class="flip-card-front">
+									<img th:src="${movie.getPosterPathUrl()}" alt="frontPoster"
+                                         style="width:100%;height:100%;">
+								</div>
+								<div class="flip-card-back">
+									<div class="movie-snap">
+										<img th:src="${movie.getBackdropPathUrl()}" alt="backPoster"
+                                             style="width:100%;height:100%;">
+									</div>
+									<h1 th:text="${movie.title}"></h1>
+									<br>
+									<p><span th:text="${movie.release_date}"></span> <span
+                                            th:text="${movie.runtime}"></span></p>
+									<p>Titre d'origine: <span th:text="${movie.original_title}"></span></p>
+                                    <!--                                    										<p>Collection: <span th:text="${movie?.belongs_to_collection?.name}"></span></p>-->
+                                    <!--										<p>Genres: <span th:text="${movie?.genres.get(0).name}"></span></p>-->
+									<p>Moyenne de vote: <span th:text="${movie?.vote_average}"></span></p>
+                                    <!--										<p>Langues: <span th:text="${movie?.spoken_languages.get(0)?.name}"></span></p>-->
+									<div class="movie-synopsis" th:text="${movie?.overview}"></div>
+								</div>
+							</div>
+						</div>
+                <div class="btn-group">
+                    <form th:action="@{/add_comment_to_seen_movie}" method="post">
+                        <input type="hidden" th:value="${movie.id}" name="idMovie" id="idMovie">
+                        <input type="text" placeholder="Ajouter un commentaire sur ce film ici" name="commentContent"
+                               id="commentContent">
+                        <input type="submit" style="text-align:center" value="Commenter">
+                    </form>
+                    <form th:action="@{/remove_already_seen}" method="post">
+                        <input type="hidden" th:value="${movie.id}" name="idMovie">
+                        <button type="submit"
+                                class="btn btn-default"><span
+                                class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                    </form>
+                </div>
+            </div>
+        <div>
+            <div th:each="comment: ${movie.comments}">
+                <p th:text="${comment.content}"></p>
+                <a th:href="${'/delete_comment_already_seen_movie?commentId='+comment.idComment+'&idMovie='+movie.id}"><button type="submit" class="btn btn-default"><span
+                        class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></a>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</span>
+</body>
+</html>

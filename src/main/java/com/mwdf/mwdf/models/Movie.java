@@ -26,6 +26,10 @@ public class Movie {
     @Column(name = "api_film_id", nullable = false)
     private int apiFilmId;
 
+    @NotNull
+    @Column(name = "already_seen", nullable = false, columnDefinition = "boolean default false")
+    private boolean alreadySeen = false;
+
     @ManyToMany(mappedBy = "movies", fetch = FetchType.LAZY)
     @Cascade(value = {org.hibernate.annotations.CascadeType.PERSIST, org.hibernate.annotations.CascadeType.MERGE})
     Set<CustomList> lists = new HashSet<>();
@@ -71,5 +75,13 @@ public class Movie {
 
     public void setComment(List<Comment> comment) {
         this.comment = comment;
+    }
+
+    public boolean isAlreadySeen() {
+        return alreadySeen;
+    }
+
+    public void setAlreadySeen(boolean alreadySeen) {
+        this.alreadySeen = alreadySeen;
     }
 }
