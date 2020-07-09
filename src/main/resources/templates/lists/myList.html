@@ -18,7 +18,7 @@
 </span>
 
 <span th:unless="${movies.isEmpty()}">
-<div id="container-movies">
+<div id="container-movies-watchlist">
     <div class="container-movie" th:each="movie: ${movies}">
         <div class="btn-group">
                     <a th:href="${'/add_movie_to_seen?idMovie='+movie.id+'&listId='+listId}"><button type="submit" class="btn btn-default"><span  class="glyphicon glyphicon-ok" aria-hidden="true"></span> Déjà vu</button></a>

@@ -113,7 +113,7 @@
 			<span th:if="${movies == null}">
 				<br><br>
 				<div class="recommandation">
-					<i class="fa fa-hand-paper-o shake-slow shake-constant shake-constant--hover"><h2><b style="color:red">Bonjour <span sec:authentication="name"></span></b>, Vous aimeriez peut être ce film</h2></i>
+					<i class="fa fa-hand-paper-o"><h2><b style="color:red">Bonjour <span sec:authentication="name"></span></b>, Vous aimeriez peut être ce film</h2></i>
 				</div>
 				<div id="container-recommandation" style="margin-left: -4%;">
 					<button type="button" class="btn btn-primary" style="text-align:center"
@@ -121,7 +121,7 @@
 					</button>
 					<div class="container-movie">
 						<div class="movie">
-							<div class="flip-card shake-slow shake-constant shake-constant--hover">
+							<div class="flip-card">
 								<div class="flip-card-inner">
 									<div class="flip-card-front">
 										<img th:src="${movie.getPosterPathUrl()}" alt="frontPoster"
