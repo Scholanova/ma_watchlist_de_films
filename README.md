@@ -32,6 +32,7 @@ $ mvn spring-boot:run
 Basé sur le pattern Modèle - Vue - Contrôleur
 
 **Back**
+
 Java Spring Boot
 
 Jackson : traitement du json de l'API https://www.themoviedb.org/
@@ -41,6 +42,7 @@ Jpa : Traitement de la base de données
 Liquibase : Pour les migrations
 
 **Front**
+
 CSS, Bootstrap, Jquery, Javascript
 
 ### Convention
