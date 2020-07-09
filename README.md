@@ -30,36 +30,36 @@ $ mvn spring-boot:run
 
 ### Architecture
 Basé sur le pattern Modèle - Vue - Contrôleur
-** Back **
+**Back**
 Java Spring Boot
 Jackson : traitement du json de l'API https://www.themoviedb.org/
 Jpa : Traitement de la base de données
 Liquibase : Pour les migrations
 
-** Front **
+**Front**
 CSS, Bootstrap, Jquery, Javascript
 
 ### Convention
-** Nommage des variables **
+**Nommage des variables**
 camelCase exemple : compteurDeGirafe
 
-** Donner un nom explicite **
+**Donner un nom explicite**
 compteurDeGirafe => compte des girafes
 
-** Nommage des constantes **
+**Nommage des constantes**
 Tout en majuscule
 Séparer les mots par underscore '_'
 Donner des noms simples et descriptifs
 
-** Nommage fichier **
+**Nommage fichier**
 Les noms des classes doivent respecter les conventions suivantes 
 1ère lettre en majuscule + camelCase
 Donner des noms simples et descriptifs
 
-** Nommage des commits GIT **
+**Nommage des commits GIT**
 Dire ce que fait le commit clairement.
 
-** Nommage des branches **
+**Nommage des branches**
 Chaque branche correspond à une issue.
 Chaque issue possède un numéro
 Chaque branche se nomme : mwdf-issue/etape-numero_issue
