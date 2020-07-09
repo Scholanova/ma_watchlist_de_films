@@ -13,9 +13,10 @@
             </div>
 
             <form  th:action="@{/connexion}" method="post">
-                <input type="text" id="username" class="fadeIn second" name="username" placeholder="Nom d'utilisateur" required="required">
+                <input type="text" id="username" class="fadeIn second" name="username" placeholder="Pseudo" required="required">
                 <input type="password" id="password" class="fadeIn third" name="password" placeholder="Mot de passe" required="required">
                 <input type="submit" class="fadeIn fourth" value="Je me connecte">
+		 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             </form>
         </div>
     </div>
