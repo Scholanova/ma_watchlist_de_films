@@ -220,6 +220,7 @@ form.example::after {
 margin-left: 23%;
 }
 
+<<<<<<< 9e159e91d9eb625f62a5e4e4feb471de02920f90
 #input-search{
     margin: 0;
 }
@@ -279,6 +280,8 @@ margin-left: 23%;
 	background-color: #aaa;
 }
 
+=======
+>>>>>>> resize mawatchlist
 div .movie-synopsis{
 	margin:4px, 4px; 
 	width: 100%; 
