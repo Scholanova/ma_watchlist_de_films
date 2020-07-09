@@ -70,7 +70,7 @@ public class LoginControllerTest {
 
 //             Then
             assertThat(responseEntity.getStatusCode()).isEqualTo(OK);
-            Assert.assertTrue(responseEntity.getBody().toString().contains("Pseudo"));
+            Assert.assertTrue(responseEntity.getBody().toString().contains("Nom d'utilisateur"));
         }
 
         @Test
