@@ -211,7 +211,7 @@ public class MovieController {
 			CustomList list = customListRepository.findByIdList( Long.parseLong(listId));
 			list.getMovies().add(movie);
 			customListRepository.save(list);
-			return new ModelAndView("redirect:" + "/mes_listes");
+			return new ModelAndView("redirect:" + "/index");
 		}
 		return new ModelAndView("redirect:" + "/connexion");
 	}
