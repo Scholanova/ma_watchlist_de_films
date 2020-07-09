@@ -11,8 +11,11 @@ Application Watcher permet de créer une Playist de film à regarder
   - Cyril VUILLEMIN
   
 ## Liens 
-#### Scalingo : 
-https://watcher.osc-fr1.scalingo.io/  
+#### Scalingo
+https://watcher.osc-fr1.scalingo.io/
+#### API des Films
+https://www.themoviedb.org/
+
   
 ## Initialisation du projet
 
@@ -36,7 +39,7 @@ Basé sur le pattern Modèle - Vue - Contrôleur
 
 Java Spring Boot
 
-Jackson : traitement du json de l'API https://www.themoviedb.org/
+Jackson : traitement du json de l'API de films
 
 Jpa : Traitement de la base de données
 
