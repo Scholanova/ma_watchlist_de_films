@@ -61,6 +61,8 @@
         <div>
             <div th:each="comment: ${movie.comments}">
                 <p th:text="${comment.content}"></p>
+                <a th:href="${'/delete_comment?commentId='+comment.idComment+'&listId='+listId+'&idMovie='+movie.id}"><button type="submit" class="btn btn-default"><span
+                    class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></a>
             </div>
         </div>
         </div>
