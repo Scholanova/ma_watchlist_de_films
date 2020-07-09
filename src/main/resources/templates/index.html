@@ -43,7 +43,7 @@
 		                                <h1 th:text="${movie.title}"></h1>
 		                                <br>
 		                                <p>Date de Sortie: <span th:text="${movie.release_date}"></span></p>
-		                                <p>Durée: <span th:text="${movie.runtime + ' minutes'}"></span></p>
+		                                <p>DurÃ©e: <span th:text="${movie.runtime + ' minutes'}"></span></p>
 		                                <p>Titre d'origine: <span th:text="${movie.original_title}"></span></p>
 		                                <!--										<p>Collection: <span th:text="${movie?.belongs_to_collection?.name}"></span></p>-->
 		                                <!--										<p>Genres: <span th:text="${movie?.genres.get(0).name}"></span></p>-->
@@ -75,7 +75,7 @@
 		    <div class="modal-dialog" role="document">
 		        <div class="modal-content">
 		            <div class="modal-header">
-		                <h5 class="modal-title" id="exampleModalLabel">Ajouter à ma liste</h5>
+		                <h5 class="modal-title" id="exampleModalLabel">Ajouter Ã  ma liste</h5>
 		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		                    <span aria-hidden="true">&times;</span>
 		                </button>
@@ -113,7 +113,7 @@
 			<span th:if="${movies == null}">
 				<br><br>
 				<div class="recommandation">
-					<i class="fa fa-hand-paper-o"><h2><b style="color:red">Bonjour <span sec:authentication="name"></span></b>, Vous aimeriez peut être ce film</h2></i>
+					<i class="fa fa-hand-paper-o"><h2><b style="color:red">Bonjour <span sec:authentication="name"></span></b>, Vous aimeriez peut Ãªtre ce film</h2></i>
 				</div>
 				<div id="container-recommandation" style="margin-left: -4%;">
 					<button type="button" class="btn btn-primary" style="text-align:center"
@@ -135,7 +135,7 @@
 		                                <h1 th:text="${movie.title}"></h1>
 		                                <br>
 		                                <p>Date de Sortie: <span th:text="${movie.release_date}"></span></p>
-		                                <p>Durée: <span th:text="${movie.runtime + ' minutes'}"></span></p>
+		                                <p>DurÃ©e: <span th:text="${movie.runtime + ' minutes'}"></span></p>
 		                                <p>Titre d'origine: <span th:text="${movie.original_title}"></span></p>
 		                                <!--<p>Collection: <span th:text="${movie?.belongs_to_collection?.name}"></span></p>-->
 		                                <!--<p>Genres: <span th:text="${movie?.genres.get(0).name}"></span></p>-->
@@ -146,17 +146,17 @@
 								</div>
 							</div>
 							<div th:switch="${redirect}">
-								<button type="button" class="btn btn-primary" style="text-align:center" data-toggle="modal tooltip"
-			                            th:data-val="${movie.id}" data-target="#Modal" th:case="0" data-placement="right" title="Ajouter à ma watchlist"><i
+								<button type="button" class="btn btn-primary" style="text-align:center" data-toggle="modal"
+			                            th:data-val="${movie.id}" data-target="#Modal" th:case="0" data-placement="right" title="Ajouter Ã  ma watchlist"><i
 			                            class="fas fa-plus"></i>
 			                    </button>
-								<button type="button" class="btn btn-primary" style="text-align:center" data-toggle="modal tooltip"
-			                            th:data-val="${movie.id}" data-target="#Modal" th:case="1" data-placement="right" title="Ajouter à ma watchlist"><i
+								<button type="button" class="btn btn-primary" style="text-align:center" data-toggle="modal"
+			                            th:data-val="${movie.id}" data-target="#Modal" th:case="1" data-placement="right" title="Ajouter Ã  ma watchlist"><i
 			                            class="fas fa-plus"></i>
 			                    </button>
 								<button type="button" class="btn btn-primary" style="text-align:center"
 			                            onclick="window.location.replace('/connexion')" th:case="2"><i
-			                            class="fas fa-plus" data-toggle="tooltip" data-placement="right" title="Ajouter à ma watchlist"></i>
+			                            class="fas fa-plus" data-placement="right" title="Ajouter Ã  ma watchlist"></i>
 			                    </button>
 							</div>
 						</div>
