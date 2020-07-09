@@ -18,6 +18,8 @@
     <script src="../../static/js/script.js" th:src="@{/js/script.js}"></script>
     <script src="../../static/js/dropdown.js" th:src="@{/js/dropdown.js}"></script>
     <script src="../../static/js/movie.js" th:src="@{/js/movie.js}"></script>
+    <link href="../../static/css/login.css" rel="stylesheet" th:href="@{/css/login.css}"/>
+    <link href="../../static/css/header.css" rel="stylesheet" th:href="@{/css/header.css}"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
 
@@ -29,7 +31,7 @@
         <a sec:authorize="isAuthenticated()" href='/mes_films_vus'><i class="fa fa-eye"></i>Mes films déjà vus</a>
 
         <a sec:authorize="isAnonymous()" href="/inscription"><i class="fa fa-user-plus"></i>Inscription</a>
-        <a sec:authorize="isAnonymous()" href="/connexion"><i class="fa fa-sign-in"></i>Connexion</a>
+        <a sec:authorize="isAnonymous()" href="/connexion"><i class="fa fa-fw fa-user"></i>Connexion</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/logout}"><i class="fa fa-sign-out"></i>Déconnexion</a>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
