@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import com.mwdf.mwdf.entity.Genre;
 import com.mwdf.mwdf.models.Comment;
@@ -88,7 +88,12 @@ public class MovieController {
 			String currentUserName = authentication.getName();
 
 			User user = userRepository.findByUsername(currentUserName);
-			model.addAttribute("lists", user.getLists());
+
+			Set<CustomList> lists = user.getLists();
+			Set<CustomList> sortedList = lists.stream()
+					.sorted(Comparator.comparing(CustomList::getTitle)).collect(Collectors.toCollection(LinkedHashSet::new));
+
+			model.addAttribute("lists",sortedList);
 			if ( user.getLists().size()== 0)
 				model.addAttribute("redirect",0);
 			else
