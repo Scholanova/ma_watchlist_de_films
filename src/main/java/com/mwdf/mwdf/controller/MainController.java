@@ -1,6 +1,7 @@
 package com.mwdf.mwdf.controller;
 
 import com.mwdf.mwdf.entity.Movie;
+import com.mwdf.mwdf.models.CustomList;
 import com.mwdf.mwdf.models.User;
 import com.mwdf.mwdf.repositories.UserRepository;
 import com.mwdf.mwdf.services.MovieService;
@@ -13,6 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Comparator;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @EnableAutoConfiguration
@@ -38,7 +44,12 @@ public class MainController {
 			String currentUserName = authentication.getName();
 
 			User user = userRepository.findByUsername(currentUserName);
-			model.addAttribute("lists", user.getLists());
+
+			Set<CustomList> lists = user.getLists();
+			Set<CustomList> sortedList = lists.stream()
+					.sorted(Comparator.comparing(CustomList::getTitle)).collect(Collectors.toCollection(LinkedHashSet::new));
+
+			model.addAttribute("lists", sortedList);
 			if ( user.getLists().size()== 0)
 				model.addAttribute("redirect",0);
 			else
