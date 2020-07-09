@@ -67,7 +67,7 @@ public class MovieServiceImpl implements MovieService{
         else{
             params = params.replaceAll(" ","%20");
         }
-    	String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params;
+    	String url = "https://api.themoviedb.org/3/search/movie?api_key="+TOKEN+"&query="+params+"&language=+"+LANG;
         String json = getUrlContent(url);
         Result res = resultMapper(json);
         /*
@@ -80,23 +80,48 @@ public class MovieServiceImpl implements MovieService{
         }
         */
         List<Movie> updatedMovie = new ArrayList<Movie>();
+        /*
         for(Movie movie : res.getResults()){
             movie = getMovie(movie.getId());
             movie.initPosterFilm();
             movie.initBackDropFilm();
+
             movie.initGenreIfNull();
             movie.initBelongs_To_CollentionIfNull();
             movie.initSpoken_languagesIfNull();
             updatedMovie.add(movie);
         }
+        */
+
+        Movie tmp = new Movie();
+        for(Movie movie : res.getResults()){
+            tmp = getMovie(movie.getId());
+            /*movie.initPosterFilm();
+            movie.initBackDropFilm();
+            */
+            movie.initGenreIfNull();
+            movie.initBelongs_To_CollentionIfNull();
+            movie.initSpoken_languagesIfNull();
+            if(tmp.getTitle()!= null || !tmp.getTitle().isEmpty()){
+                movie.setTitle(tmp.getTitle());
+            }
+
+            if(tmp.getOverview() != null || !tmp.getOverview().isEmpty()){
+                movie.setOverview(tmp.getOverview());
+            }
+
+            movie.setRuntime(tmp.getRuntime());
+        }
+
+        //res.setResults(updatedMovie);
+        initMoviePosition(res);
         /*
+        System.out.println("UPDATED MOVIES");
         for(Movie movie : res.getResults()){
             System.out.println(movie);
         }
         */
 
-        res.setResults(updatedMovie);
-        initMoviePosition(res);
         return res;
     }
     public String search(@PathVariable("params") String params) {
@@ -182,6 +207,7 @@ public class MovieServiceImpl implements MovieService{
         String url = "https://api.themoviedb.org/3/movie/popular?api_key="+TOKEN+"&language="+LANG+"&page="+page;
         String json = getUrlContent(url);
         Result result = resultMapper(json);
-        return result.getResults().get(randomId);
+        Movie movieFromResult = result.getResults().get(randomId);
+        return getMovie(movieFromResult.getId());
     }
 }

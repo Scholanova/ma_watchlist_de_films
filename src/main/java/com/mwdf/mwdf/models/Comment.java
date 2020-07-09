@@ -1,6 +1,7 @@
 package com.mwdf.mwdf.models;
 
 import com.sun.istack.NotNull;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -17,11 +18,13 @@ public class Comment {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "user_id") //quiz table will have a column `user_id` foreign key referring to user table's `id` column
+    @JoinColumn(name = "user_id")
+    @Cascade(value = org.hibernate.annotations.CascadeType.REMOVE)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "movie_id") //quiz table will have a column `user_id` foreign key referring to user table's `id` column
+    @JoinColumn(name = "movie_id")
+    @Cascade(value = org.hibernate.annotations.CascadeType.REMOVE)
     private Movie movie;
 
     public Comment(String content, User user, Movie movie) {
