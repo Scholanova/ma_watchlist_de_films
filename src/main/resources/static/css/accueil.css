@@ -59,6 +59,11 @@ body
 	max-width: 50%;
 }
 
+.container 
+{
+	background-color:#f2f2f2
+}
+
 form.example input[type=text] {
   padding: 10px;
   font-size: 17px;
@@ -253,16 +258,11 @@ div .movie-synopsis{
     text-align:justify; 
 }
 
-form.myform .btn-group{
-  margin-left: 22%;
-}
-}
-
-/* Clear floats (clearfix hack) */
-form.myform .btn-group:after {
-  content: "";
-  clear: both;
-  display: table;
+form.connexion,form.inscription
+{
+	width: 50%;
+	margin: auto;
+	padding: 2%;"
 }
 
 .input-group-text {
@@ -270,17 +270,62 @@ form.myform .btn-group:after {
     padding: 6px;
 }
 
-.center
-{
-	width: 60%;
-	margin: auto;
-	font-size: 14px;
-	background-color: #ddd;
-	padding: 2%;
-}
-
 .error
 {
 	text-align: center;
 	color: red;
+}
+
+form .btn-default, .center .btn-default{
+    color: #333;
+    background-color: white;
+    border-color: #adadad;
+}
+
+form .btn-default:hover,.center .btn-default:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+.container a{
+   text-decoration:none;
+   color:black"
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myList li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#myList li a:hover:not(.header) {
+  background-color: #eee;
+}
+
+.btn.active {
+  background-color: #666;
+  color: white;
 }

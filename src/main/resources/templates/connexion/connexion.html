@@ -8,7 +8,7 @@
     <div class="container">
     	<h2 class="welcome">Connectez-vous</h2>
         <p th:if="${loginError}" class="error">Mauvais mot de passe ou nom d'utilisateur</p>
-        <form th:action="@{/connexion}" method="post" style="width: 50%;margin: auto;">
+        <form class="connexion" th:action="@{/connexion}" method="post">
             <fieldset>
 
                 <div class="form-group">
