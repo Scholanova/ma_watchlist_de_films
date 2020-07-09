@@ -34,6 +34,7 @@ public class Movie {
 	private double vote_average;
 	private int vote_count;
 	private int runtime;
+	private boolean alreadySeen;
 
 	private String release_date;
 
@@ -124,6 +125,14 @@ public class Movie {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public boolean isAlreadySeen() {
+		return alreadySeen;
+	}
+
+	public void setAlreadySeen(boolean alreadySeen) {
+		this.alreadySeen = alreadySeen;
 	}
 
 	public void setBackdrop_path(String backdrop_path) {
