@@ -46,24 +46,26 @@
 							</div>
 						</div>
                 <div class="btn-group">
-<!--                    <form th:action="@{/add_comment}" method="post">-->
-<!--                        <input type="hidden" th:value="${movie.id}" name="idMovie" id="idMovie">-->
-<!--                        <input type="text" placeholder="Ajouter un commentaire sur ce film ici" name="commentContent"-->
-<!--                               id="commentContent">-->
-<!--                        <input type="hidden" th:value="${listId}" name="listId" id="listId">-->
-<!--                        <input type="submit" style="text-align:center" value="Commenter">-->
-<!--                    </form>-->
-<!--                    <a th:href="${'/delete_movie?movieId='+movie.id+'&listId='+listId}"><button type="submit"-->
-<!--                                                                                                class="btn btn-default"><span-->
-<!--                            class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></a>-->
+                    <form th:action="@{/add_comment_to_seen_movie}" method="post">
+                        <input type="hidden" th:value="${movie.id}" name="idMovie" id="idMovie">
+                        <input type="text" placeholder="Ajouter un commentaire sur ce film ici" name="commentContent"
+                               id="commentContent">
+                        <input type="submit" style="text-align:center" value="Commenter">
+                    </form>
+                    <form th:action="@{/remove_already_seen}" method="post">
+                        <input type="hidden" th:value="${movie.id}" name="idMovie">
+                        <button type="submit"
+                                class="btn btn-default"><span
+                                class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                    </form>
                 </div>
             </div>
         <div>
-<!--            <div th:each="comment: ${movie.comments}">-->
-<!--                <p th:text="${comment.content}"></p>-->
-<!--                <a th:href="${'/delete_comment?commentId='+comment.idComment+'&listId='+listId+'&idMovie='+movie.id}"><button type="submit" class="btn btn-default"><span-->
-<!--                        class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></a>-->
-<!--            </div>-->
+            <div th:each="comment: ${movie.comments}">
+                <p th:text="${comment.content}"></p>
+                <a th:href="${'/delete_comment_already_seen_movie?commentId='+comment.idComment+'&idMovie='+movie.id}"><button type="submit" class="btn btn-default"><span
+                        class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></a>
+            </div>
         </div>
         </div>
     </div>

@@ -387,4 +387,80 @@ public class MovieController {
 
 		return new ModelAndView("connexion/connexion");
 	}
+
+	@PostMapping("/add_comment_to_seen_movie")
+	public ModelAndView PostCommentToMovieSeenMovie(@RequestParam String commentContent, @RequestParam int idMovie){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			String userName = authentication.getName();
+
+			User currentUser = userRepository.findByUsername(userName);
+			List<CustomList> customLists = customListRepository.findByUsers(currentUser);
+
+			for (CustomList customList : customLists) {
+				for (com.mwdf.mwdf.models.Movie movie : customList.getMovies()) {
+					if (movie.getApiFilmId() == idMovie) {
+						Comment comment = new Comment(commentContent);
+						comment.setUser(currentUser);
+						comment.setMovie(movie);
+						commentRepository.save(comment);
+					}
+				}
+			}
+
+			return new ModelAndView("redirect:" + "/mes_films_vus");
+		}
+
+		return new ModelAndView("connexion/connexion");
+	}
+
+	@GetMapping("/delete_comment_already_seen_movie")
+	public ModelAndView DeleteComment(@RequestParam long commentId, @RequestParam int idMovie){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			String userName = authentication.getName();
+			User currentUser = userRepository.findByUsername(userName);
+
+			List<CustomList> customLists = customListRepository.findByUsers(currentUser);
+
+			for (CustomList customList : customLists) {
+				for (com.mwdf.mwdf.models.Movie movie : customList.getMovies()) {
+					if (movie.getApiFilmId() == idMovie) {
+						List<Comment> comments = commentRepository.findByUserAndMovie(currentUser, movie);
+						comments.removeIf(m -> m.getIdComment().equals(commentId));
+						movie.setComment(comments);
+						currentUser.setComment(comments);
+					}
+				}
+			}
+			commentRepository.deleteById(commentId);
+
+			return new ModelAndView("redirect:" + "/mes_films_vus");
+		}
+
+		return new ModelAndView("connexion/connexion");
+	}
+
+	@PostMapping("/remove_already_seen")
+	public ModelAndView RemoveAlreadySeen(@RequestParam int idMovie){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			String userName = authentication.getName();
+			User currentUser = userRepository.findByUsername(userName);
+			List<CustomList> customLists = customListRepository.findByUsers(currentUser);
+
+			for (CustomList customList : customLists) {
+				for (com.mwdf.mwdf.models.Movie movie : customList.getMovies()) {
+					if (movie.getApiFilmId() == idMovie) {
+						movie.setAlreadySeen(false);
+						movieRepository.save(movie);
+					}
+				}
+			}
+
+			return new ModelAndView("redirect:" + "/mes_films_vus");
+		}
+
+		return new ModelAndView("connexion/connexion");
+	}
 }
