@@ -48,6 +48,13 @@ body
 	color: #0b7dda;
 	font-family: initial;
 }
+
+.recommandation
+{
+	text-align:center;
+	color:black;
+	font-family: initial;
+}
 .welcome h1
 {
 	font-size: 45px;
