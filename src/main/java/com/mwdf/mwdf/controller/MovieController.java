@@ -237,6 +237,7 @@ public class MovieController {
 			for (com.mwdf.mwdf.models.Movie movie : list.getMovies()) {
 				Movie apiMovie = movieService.getMovie(movie.getApiFilmId());
 				apiMovie.setComments(movie.getComment());
+				apiMovie.setAlreadySeen(movie.isAlreadySeen());
 				movies.add(apiMovie);
 			}
 
