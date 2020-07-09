@@ -19,27 +19,34 @@
 
 <span th:unless="${movies.isEmpty()}">
 <div id="container-movies-watchlist">
-    <div class="container-movie" th:each="movie: ${movies}">
+    <div class="container-movie" style="width:30%" th:each="movie: ${movies}">
         <div class="btn-group" style="margin-left: 23%;">
-                    <a th:href="${'/add_movie_to_seen?idMovie='+movie.id+'&listId='+listId}"><button type="submit" class="btn btn-default"><span  class="glyphicon glyphicon-ok" aria-hidden="true" ></span> Déjà vu</button></a>
+                    <a th:href="${'/add_movie_to_seen?idMovie='+movie.id+'&listId='+listId}"><button type="submit"
+                                                                                                     class="btn btn-default"><span
+                            class="glyphicon glyphicon-ok" aria-hidden="true"></span> Déjà vu</button></a>
         </div>
         <div class="movie">
             <div class="flip-card">
 							<div class="flip-card-inner">
 								<div class="flip-card-front">
-                                    <h1 th:if="${movie?.getPosterPathUrl() == null}">  <span th:text="${movie.title}"></span></h1>
-                                    <img th:if="${movie?.getPosterPathUrl() != null}" th:src="${movie?.getPosterPathUrl()}" alt="frontPoster" style="width:100%;height:100%;">
+                                    <h1 th:if="${movie?.getPosterPathUrl() == null}">  <span
+                                            th:text="${movie.title}"></span></h1>
+                                    <img th:if="${movie?.getPosterPathUrl() != null}"
+                                         th:src="${movie?.getPosterPathUrl()}" alt="frontPoster"
+                                         style="width:100%;height:100%;">
 								</div>
 								<div class="flip-card-back">
 									<div class="movie-snap">
-										<img th:if="${movie?.getBackdropPathUrl() != null}" th:src="${movie?.getBackdropPathUrl()}" alt="unless" style="width:100%;height:100%;">
+										<img th:if="${movie?.getBackdropPathUrl() != null}"
+                                             th:src="${movie?.getBackdropPathUrl()}" alt="unless"
+                                             style="width:100%;height:100%;">
 									</div>
 									<h1 th:text="${movie.title}"></h1>
 									<br>
 							        <p>Date de Sortie: <span th:text="${movie.release_date}"></span></p>
                                     <p>Durée: <span th:text="${movie.runtime +' minutes'}"></span></p>
 									<p>Titre d'origine: <span th:text="${movie.original_title}"></span></p>
-<!--                                    										<p>Collection: <span th:text="${movie?.belongs_to_collection?.name}"></span></p>-->
+                                    <!--                                    										<p>Collection: <span th:text="${movie?.belongs_to_collection?.name}"></span></p>-->
                                     <!--										<p>Genres: <span th:text="${movie?.genres.get(0).name}"></span></p>-->
 									<p>Note: <span th:text="${movie?.vote_average +'/10'}"></span></p>
                                     <!--										<p>Langues: <span th:text="${movie?.spoken_languages.get(0)?.name}"></span></p>-->
@@ -47,25 +54,28 @@
 								</div>
 							</div>
 						</div>
-                <div class="btn-group">
+            <div class="col-md-12">
+                <div class="btn-group col-md-6">
                     <form th:action="@{/add_comment}" method="post">
                         <input type="hidden" th:value="${movie.id}" name="idMovie" id="idMovie">
                         <input type="text" placeholder="Ajouter un commentaire" name="commentContent"
                                id="commentContent">
                         <input type="hidden" th:value="${listId}" name="listId" id="listId">
                         <input type="submit" style="text-align:center" value="Commenter">
+                    </form>
+                </div>
                          <a th:href="${'/delete_movie?movieId='+movie.id+'&listId='+listId}"><button type="submit"
                                                                                                      class="btn btn-default"><span
-                                 class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></a>
-                    </form>
+                                 class="glyphicon glyphicon-trash" aria-hidden="true" style="font-size: 30px;"></span></button></a>
 
-                </div>
+            </div>
             </div>
         <div>
             <div th:each="comment: ${movie.comments}">
                 <p th:text="${comment.content}"></p>
-                <a th:href="${'/delete_comment?commentId='+comment.idComment+'&listId='+listId+'&idMovie='+movie.id}"><button type="submit" class="btn btn-default"><span
-                    class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></a>
+                <a th:href="${'/delete_comment?commentId='+comment.idComment+'&listId='+listId+'&idMovie='+movie.id}"><button
+                        type="submit" class="btn btn-default"><span
+                        class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></a>
             </div>
         </div>
         </div>
