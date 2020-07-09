@@ -1,7 +1,7 @@
 # ma_watchlist_de_films!
 
 
-Application Watcher permet de créer une Playist de film à regarder [à compléter ]
+Application Watcher permet de créer une Playist de film à regarder
 
 ## Contributors
 
