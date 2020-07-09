@@ -6,7 +6,7 @@
     <h2 class="welcome">Inscrivez-vous</h2>
     <p th:if="${registrationError}" class="error">Le nom d'utilisateur existe déjà</p>
 
-    <form th:action="@{/inscription}" method="post" style="width: 50%;margin: auto;">
+    <form class="inscription" th:action="@{/inscription}" method="post">
         <fieldset>
 
             <div class="form-group">
