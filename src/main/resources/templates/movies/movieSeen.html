@@ -48,17 +48,16 @@
                 <div class="btn-group">
                     <form th:action="@{/add_comment_to_seen_movie}" method="post">
                         <input type="hidden" th:value="${movie.id}" name="idMovie" id="idMovie">
-                        <input type="text" placeholder="Ajouter un commentaire sur ce film ici" name="commentContent"
+                        <input type="text" placeholder="Ajouter un commentaire" name="commentContent"
                                id="commentContent">
                         <input type="submit" style="text-align:center" value="Commenter">
                         <form th:action="@{/remove_already_seen}" method="post">
                             <input type="hidden" th:value="${movie.id}" name="idMovie">
                             <button type="submit"
                                     class="btn btn-default"><span
-                                    class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                                    aria-hidden="true"></span>Je ne l'ai pas vu</button>
+                        </form>
                     </form>
-                    </form>
-
                 </div>
             </div>
         <div>
