@@ -19,7 +19,7 @@
 
 <span th:unless="${movies.isEmpty()}">
 <div id="container-movies-watchlist">
-    <div class="container-movie" th:each="movie: ${movies}">
+    <div class="container-movie" style="width:30%" th:each="movie: ${movies}">
         <div class="movie">
             <div class="flip-card">
 							<div class="flip-card-inner">
@@ -45,20 +45,20 @@
 								</div>
 							</div>
 						</div>
-                <div class="btn-group">
+            <div style="margin-top: 10px;" class="col-md-12">
+                <div class="btn-group col-md-6">
                     <form th:action="@{/add_comment_to_seen_movie}" method="post">
                         <input type="hidden" th:value="${movie.id}" name="idMovie" id="idMovie">
-                        <input type="text" placeholder="Ajouter un commentaire" name="commentContent"
+                        <input type="text" placeholder="Ajouter un commentaire" style="width: 90%;"name="commentContent"
                                id="commentContent">
                         <input type="submit" style="text-align:center" value="Commenter">
-                        <form th:action="@{/remove_already_seen}" method="post">
+                    </form>
+                    <form th:action="@{/remove_already_seen}" method="post">
                             <input type="hidden" th:value="${movie.id}" name="idMovie">
-                            <button type="submit"
-                                    class="btn btn-default"><span
-                                    aria-hidden="true"></span>Je ne l'ai pas vu</button>
-                        </form>
+                             <button type="submit" class="btn btn-default" style="margin-left:0px"><span aria-hidden="true"></span>Je ne l'ai pas vu</button>
                     </form>
                 </div>
+            </div>
             </div>
         <div>
             <div th:each="comment: ${movie.comments}">
