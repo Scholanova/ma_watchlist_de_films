@@ -46,25 +46,29 @@ body
 {
 	text-align:center;
 	color : #b90707;
-	font-family: initial;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.welcome a
+{
+	color : #b90707;
 }
 
 .recommandation
 {
 	text-align:center;
 	color:black;
-	font-family: initial;
+	font-family: 'Montserrat', sans-serif;
 }
 
 .recommandation
 {
 	text-align:center;
 	color:black;
-	font-family: initial;
+	font-family: 'Montserrat', sans-serif;
 }
 .welcome h1
 {
-    font-family: 'Montserrat', sans-serif;
 	font-size: 45px;
 }
 
@@ -220,68 +224,10 @@ form.example::after {
 margin-left: 23%;
 }
 
-<<<<<<< 9e159e91d9eb625f62a5e4e4feb471de02920f90
 #input-search{
     margin: 0;
 }
 
-/* MOVIE DETAILS */
-.movie-details{
-	position: relative;
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(-90deg, #fff, #eee);
-}
-.movie-details h1{
-	position:relative;
-	font-size: 20px;
-	font-weight: 700;
-	color: #464646;
-	text-align: left;
-	margin: 10px; 
-	text-transform: uppercase;
-}
-.movie-details h1 span{
-	font-size: 14px;
-	font-weight: 400;
-	color: #aaa;
-	text-transform: lowercase;
-}
-.movie-tags{
-	position: relative;
-	margin: 0 10px;
-	padding: 0;
-}
-.movie-tags li{
-	position: relative;
-	list-style: none;
-	display: inline-block;
-	background-color: #ccc;
-	margin: 0;
-	padding: 3px 7px;
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	transition: all 0.2s ease-in-out;
-	-moz-transition: all 0.2s ease-in-out;
-	-webkit-transition: all 0.2s ease-in-out;
-}
-.movie-tags li a{
-	position: relative;
-	text-decoration: none;
-	font-size: 10px;
-	line-height: 30px;
-	text-transform: uppercase;
-	color: #fff;
-}
-.movie-tags li:hover{
-	background-color: #aaa;
-}
-
-=======
->>>>>>> resize mawatchlist
 div .movie-synopsis{
 	margin:4px, 4px; 
 	width: 100%; 
@@ -370,4 +316,24 @@ form .btn-default:hover,.center .btn-default:hover {
 position: relative;
 display: inline-block;
 opacity: 1;
+}
+
+.button {
+  background-color: #b90707;
+  border: none;
+  color: #fff;
+  padding: .375rem .75rem;
+ line-height: 1.5;
+ border-radius: .25rem;
+transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+form input[type="submit"]{
+    background-color: #b90707;
 }
