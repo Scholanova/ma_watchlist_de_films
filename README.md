@@ -9,6 +9,7 @@ Application Watcher permet de créer une Playist de film à regarder
   - Noblesse Kasa
   - Paul Pauwels
   - Cyril VUILLEMIN
+  - Livio Chan-Tung
   
 ## Liens 
 #### Scalingo
